@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
@@ -20,10 +21,10 @@ app.use(bodyParser.json());
 
 // MySQL Connection
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root", // Change if needed
-    password: "16271627", // Change if needed
-    database: "mh", // Replace with your database name
+    host: process.env.sql108.infinityfree.com,
+    user: process.env.if0_38940004 , // Change if needed
+    password: process.env.nati1627, // Change if needed
+    database: process.env.if0_38940004_senbet, // Replace with your database name
 });
 
 db.connect((err) => {
