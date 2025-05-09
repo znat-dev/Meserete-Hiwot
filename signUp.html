@@ -134,7 +134,7 @@
             let password = document.getElementById("password").value;
             let errorMessage = document.getElementById("errorMessage");
 
-            fetch("http://localhost:15080/login", {
+            fetch("http://localhost:3306/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username: username, password: password })
