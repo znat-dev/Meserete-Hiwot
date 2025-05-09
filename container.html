@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+            margin: 0;
+           
+            padding: 0px;
+        }
+        iframe {
+            width: 100%;
+            height: 100vh; /* Adjust height as needed */
+            border: none;
+            margin: 0px;
+            padding: 0px;
+        }
+       
+    </style>
+</head>
+<body>
+
+    <iframe id="contentFrame"></iframe>
+
+    <script>
+        // Function to get query parameters
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // On page load, set the iframe src based on the query parameter
+        window.onload = function() {
+            const page = getQueryParameter('page') || 'default.html'; // Default to table page
+            document.getElementById('contentFrame').src = page;
+        };
+    </script>
+
+</body>
+</html>

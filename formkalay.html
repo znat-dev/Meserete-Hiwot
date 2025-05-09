@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+        <link rel="shortcut icon" type="x-icon" href="WhiteImage.jpg">
+        <style> 
+        body {
+          
+          align-items: center;
+          justify-content: center;
+        margin: 0px;
+        padding: 0px;
+      
+        }
+            .main {
+                width: 640px;
+                background-color: #fff;
+                margin-top: 0px;
+                padding-top: 5px;
+                padding-bottom: 20px;
+                padding-left: 15px;
+                padding-right: 0px;
+                border-radius: 10px;
+                border: 2px solid #0072bc;
+                box-shadow: 100px black;
+                margin-bottom: 20px;
+                flex-shrink: 1;
+                min-width: fit-content;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-left: 170px;
+            } 
+            .next {
+                width: 655px;
+                background-color: #fff;
+                margin-top: 0px;
+                padding-top: 10px;
+                padding-bottom: 20px;
+                padding-left: 0px;
+                padding-right: 0px;
+                border-radius: 10px;
+                border: 2px solid #0072bc;
+                box-shadow: 100px black;
+                margin-bottom: 20px;
+                flex-shrink: 1;
+                margin-left: 170px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }       
+           .DemoIn {
+                display: flex;
+                align-items: center;
+                padding-left: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+           }
+           .DemoNa {
+                display: flex;
+                align-items: center;
+                padding-left: 0px;
+                margin: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+           }
+           .mesria {
+                display: flex;
+                align-items: center;
+                padding-left: 0px;
+                margin: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                gap: 20px;
+           }
+           #mesriabet {
+            width: 200px;
+            
+           }
+           #kalesmu {
+            width: 200px;
+            margin-left: 20px;
+           }
+           .DemoBa2 {
+                display: flex;
+                align-items: center;
+                padding-left: 0px;
+                margin: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+           }
+           .DemoAdd1 {
+                display: flex;
+                align-items: center;
+                padding-left: 0px;
+                margin: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+           }
+           .DemoAdd2 {
+                display: flex;
+                align-items: center;
+                padding-left: 0px;
+                margin: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+           }
+           .DemoPh1 {
+                display: flex;
+                align-items: center;
+                margin: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                padding-left: 15px;
+           }
+           .DemoPh2 {
+                display: flex;
+                align-items: center;
+                margin: 0px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+           }
+           .hh1 {
+            text-align: center;
+            color:#0072bc;
+           }
+           .hh2 label {
+            color: #0072bc;
+           }
+           .hh2, .hh4  {
+            align-items: center;
+            margin-left: 10px;
+            color: #0072bc;
+           }
+           .hh3 {
+            color: #0072bc;
+           }
+           .sraaa {
+            margin: 0px;
+            padding: 0px;
+           }
+           .sra {
+                width: 640px;
+                margin-left: 170px;
+                background-color: #fff;
+                margin-top: 0px;
+                margin-bottom: 5px;
+                padding-bottom: 20px;
+                padding-left: 15px;
+                padding-right: 0px;
+                border-radius: 10px;
+                box-shadow: 100px black;
+                border: 2px solid #0072bc;
+              
+           }
+           .kalkidan {
+                width: 630px;
+                margin-left: 170px;
+                background-color: #fff;
+                margin-top: 0px;
+                margin-bottom: 5px;
+                padding-bottom: 20px;
+                padding-left: 15px;
+                padding-right: 10px;
+                padding-top: 10px;
+                border-radius: 10px;
+                box-shadow: 100px black;
+                border: 2px solid #0072bc;
+                
+           }
+           .submit {
+                width: 50%;
+                margin: 10px;
+                background-color: none;
+                margin-top: 30px;
+                margin-bottom: 5px;
+                padding-bottom: 10px;
+                padding-left: 15px;
+                padding-right: 20px;
+                padding-top: 10px;
+                border-radius: 10px;
+                box-shadow: 100px black;
+                font-weight: bold;
+                align-items: center;
+           }
+           button {
+                width: 70px;
+                height: 50px;
+                background-color:#0072bc;
+                border: none;
+                color: white;
+                border-radius: 15px;
+                margin-top: 1px;
+                font-size: 20px;
+                font-weight: bolder;
+                margin-left: 500px;
+           }
+           button:hover {
+                background-color: white;
+                color: #0072bc;
+                border: 2px solid #0072bc;
+           }
+           p {
+                color: #0072bc;
+           }
+            ::placeholder {
+                color: #0072bc;
+                opacity: 0.5;
+            }
+            label {
+                display:block;
+                text-align: center;
+                margin-bottom: 5px;
+                margin: 0px;
+                padding: 0px;
+                color: #0072bc;
+            }
+            input {
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 5px;
+                margin: 0px;
+                border: 1px solid #0072bc;
+            }
+            .checkbox-container {
+                display: flex;
+                justify-content: center;
+                margin: 10px; 
+            }
+            .checkbox-group {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0px 30px;
+                margin-left: 0px;
+                padding-left: 0px;
+            }
+            
+            .hh4 {
+                margin-left: 0px;
+                font-size: larger;
+                color:#0072bc;
+            }
+            .hh5 {
+                margin-left: 10px;
+                color:#0072bc;
+            }
+            .sraaa {
+                padding-top: 10px;
+            }
+            .inputbox-container {
+                width: 50%;
+                margin-bottom: 20px;
+                flex-shrink: 1;
+                min-width: fit-content;
+                display: flex;
+                flex-direction: row;
+            }
+            .inputbox-group {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0px 10px;
+                margin-left: 0px;
+                padding-left: 0px;
+            }
+            #fieldname {
+                width: 285px;
+            }
+            #schoolname {
+                width: 285px;
+            }
+            .profile-container {
+                position: relative;
+                width: 100px;
+                height: 100px;
+                margin: 20px auto;
+            }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #0072bc;
+            
+        }
+
+        .upload-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 0 0 50px 50px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .profile-container:hover .upload-overlay {
+            opacity: 1;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+        textarea {
+            border: 1px solid #0072bc;
+        }
+        
+        </style>
+    </head>
+    <body>
+    <form id="signupForm">
+        <h1 class="hh1">በስመ አብ ወወልድ ወመንፈስ ቅዱስ አሐዱ አምላክ አሜን! </h1>
+        <h2 class="hh2"><label>በኢትዮጵያ ኦርቶዶክስ ተዋህዶ ቤተ ክርስቲያን የየካ ደብረ ምሕረት ቅድስት ኪዳነ ምሕረት
+             እና ደብረ ቀራንዮ መድሃኔአለም ቤተ ክርስቲያን 
+             የመሰረተ ሕይወት ሰ/ት/ቤት የአባልነት መመዝገቢያ ቅጽ</label> </h2>
+        <div class="main">
+            <div class="Demo">
+                <div class="profile-container">
+                    <img id="profileImg" class="profile-pic" src="uploads/default.jpg" alt="Profile Picture">
+                    <label class="upload-overlay" for="fileInput">ምስሎትን ይጫኑ</label>
+                    <input type="file" id="fileInput" name="fileInput" accept="image/*" required>
+                </div>
+                <h3 class="hh3">* ስም እና አድራሻ</h3>
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label for="name">ስም</label>
+
+                        <input placeholder="ስም" name="name" type="text" id="name" required>
+                    </div>
+                    <div class="inputbox-group">
+                        <label>የአባት ስም</label>
+
+                        <input placeholder="የአባት ስም" name="father_name" type="text" required>
+                    </div>
+                    <div class="inputbox-group">
+                        <label>የአያት ስም</label>
+
+                        <input placeholder="የአያት ስም" name="grandfather_name" type="text" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="DemoBa">
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label for="year">የትውልድ ዘመን አ.ም</label>
+
+                        <input placeholder="የትውልድ ዘመን" name="birth_year" list="years" 
+                        id="year" name="year" type="number" required>
+                            <datalist id="years"></datalist>
+                    </div>
+                    <div class="inputbox-group">
+                        <label for="month">ወር</label>
+
+                        <input placeholder="ወር" name="birth_month" list="months" id="month" required>
+                        <datalist id="months">
+                            <option value="መስከረም">
+                            <option value="ጥቅምት">
+                            <option value="ህዳር">
+                            <option value="ታህሳስ">
+                            <option value="ጥር">
+                            <option value="የካቲት">
+                            <option value="መጋቢት">
+                            <option value="ሚያዝያ">
+                            <option value="ግንቦት">
+                            <option value="ሰኔ">
+                            <option value="ሐምሌ">
+                            <option value="ነሐሴ">
+                            <option value="ጷጉሜን">
+                        </datalist>
+                    </div>
+                    <div class="inputbox-group">
+                        <label for="day">ቀን</label>
+
+                        <input placeholder="ቀን" name="birth_day" list="days" id="day">
+                        <datalist id="days">
+                            <option value="1">
+                            <option value="2">
+                            <option value="3">
+                            <option value="4">
+                            <option value="5">
+                            <option value="6">
+                            <option value="7">
+                            <option value="8">
+                            <option value="9">
+                            <option value="10">
+                            <option value="11">
+                            <option value="12">
+                            <option value="13">
+                            <option value="14">
+                            <option value="15">
+                            <option value="16">
+                            <option value="17">
+                            <option value="18">
+                            <option value="19">
+                            <option value="20">
+                            <option value="21">
+                            <option value="22">
+                            <option value="23">
+                            <option value="24">
+                            <option value="25">
+                            <option value="26">
+                            <option value="27">
+                            <option value="28">
+                            <option value="29">
+                            <option value="30">
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+            <div class="DemoAdd">
+                <div Class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label>የመኖሪያ አድራሻ ክ/ከተማ</label>
+                        
+                        <input placeholder="ክ/ከተማ" name="address_city">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>ወረዳ</label>
+
+                        <input placeholder="ወረዳ" name="district">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>የቤት ቁጥር</label>
+
+                        <input placeholder="የቤት ቁጥር" name="house_number">
+                    </div>
+                </div>
+            </div>
+            <div class="DemoPh">
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label>የሞባይል ስልክ</label>
+
+                        <input placeholder="የሞባይል ስልክ" name="mobile">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>ተለዋጭ ስልክ</label>
+
+                        <input placeholder="ተለዋጭ ስልክ" name="alternate_phone">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>ኢ-ሜይል</label>
+
+                        <input placeholder="ኢ-ሜይል" name="email" required>
+                    </div>
+                </div>
+            </div>
+                <div class="DemoPh"> 
+                    <div class="inputbox-container">
+                        <div class="inputbox-group">
+                            <label>የክርስትና ስም</label>
+
+                            <input placeholder="የክርስትና ስም" name="baptism_name">
+                        </div>
+                        <div class="inputbox-group">
+                            <label>የንስሐ አባት ስም</label>
+
+                            <input placeholder="የንስሐ አባት ስም" name="father_christian_name">
+                        </div>
+                        <div class="inputbox-group">
+                            <label>የሚያገለግሉበት ደብር</label>
+
+                            <input placeholder="ንስሐ አባት የሚያገለግሉበት ደብር" name="father_service_location">
+                        </div>
+                    </div>
+                </div>
+        </div>
+        
+        <div class="next">
+            <div class="Demo">
+                <h3 class="hh3"> * የትምህርት ሁኔታ</h3>
+                
+                <div Class="inputbox-container">
+
+                    <div class="inputbox-group">
+                        <label>ከ1-8</label>
+
+                        <input placeholder="ከ1-8" name="education_1_8">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>ከ9-10</label>
+
+                        <input placeholder="ከ9-10" name="education_9_10" >
+                    </div>
+                    <div class="inputbox-group">
+                        <label>ከ11-12</label>
+
+                        <input placeholder="ከ11-12" name="education_11_12">
+                    </div>
+                </div>
+            </div>
+            <div class="DemoBa">
+                <h4 class="hh4">* የክፍተኛ ትምህርት የተከታተሉበት ተቋም(ኮሌጅ/ዩኒቨርሲቲ)</h4>
+                  
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label>1ኛ. ስም</label>
+
+                        <input placeholder="ስም" name="college_name1">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>ከ(አም)</label>
+
+                        <input placeholder="ከ" name="college_start1">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>እስከ(አም)</label>
+
+                        <input placeholder="እስከ" name="college_end1">
+                    </div>
+                </div>
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label>2ኛ. ስም</label>
+
+                        <input placeholder="ስም" name="college_name2">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>ከ(አም)</label>
+
+                        <input placeholder="ከ" name="college_start2">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>እስከ(አም)</label>
+
+                        <input placeholder="እስከ" name="college_end2">
+                    </div>
+                </div>
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label>3ኛ. ስም</label>
+
+                        <input placeholder="ስም" name="college_name3">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>ከ(አም)</label>
+
+                        <input placeholder="ከ" name="college_start3">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>እስከ(አም)</label>
+
+                        <input placeholder="እስከ" name="college_end3">
+                    </div>
+                </div>
+            </div>
+            <div class="DemoAdd">
+                <h4 class="hh4">* ከከፍተኛ ትምህርት የተመረቁበት ሙያ</h4>
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label>1ኛ</label>
+
+                        <input placeholder="1ኛ" name="occupation1">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>2ኛ</label>
+
+                        <input placeholder="2ኛ" name="occupation2">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>3ኛ</label>
+
+                        <input placeholder="3ኛ" name="occupation3">
+                    </div>
+                </div>
+            </div>
+            <div class="DemoPh">
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label>አሁን በመማር ላይ ከሆኑ የሚማሩበት ትምህርት ዘርፍ/ስም</label>
+
+                        <input placeholder="የትምህርቱ ዘርፍ/ስም" id="fieldname" name="current_study_field">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>አሁን በመማር ላይ ከሆኑ የሚማሩበት ትምህርት ቤት ስም</label>
+
+                        <input placeholder="የትምህርት ቤቱ ስም" id="schoolname" name="current_study_institution">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sra">
+        <div class="sraaa">
+            <h3 class="hh3">* የስራ ሁኔታ</h3>
+            
+            <div Class="checkbox-container">
+
+                <div class="checkbox-group">
+                    <label for="mengist">የመንግስት</label>
+
+                    <input placeholder=" የመንግስት" type="radio" name="huneta" id="mengist" name="work_status">
+                </div>
+                <div class="checkbox-group">
+                    <label for="yegil">የግል(ድርጅት)</label>
+
+                    <input placeholder="የግል(ድርጅት)" type="radio" name="huneta" id="yegil" name="work_status">
+                </div>
+                <div class="checkbox-group">
+                    <label for="yegilsra">የግል ስራ</label>
+
+                    <input placeholder="የግል ስራ" type="radio" name="huneta" id="yegilsra" name="work_status">
+                </div>
+                
+            </div>
+        </div>
+        <div class="DemoBa">
+            <div class="mesria">
+                <label for="mesriabet">የመስሪያ ቤቱ ስምና አድራሻ</label>
+       
+                <input placeholder="የመስሪያ ቤቱ ስምና አድራሻ" id="mesriabet" name="employer_name">
+            </div>
+        </div>
+        <div class="DemoAdd">
+            <h4 class="hh4">* አጠቃላይ የግል ሁኔታ</h4>
+            <h5 class="hh5">* የጋብቻ ሁኔታ</h5>
+            
+            <div class="checkbox-container">
+                <div class="checkbox-group">
+                    <label for="yageba">ያገባ</label>
+                
+                    <input placeholder="ያገባ" type="radio" name="marriage" id="yageba" name="marriage_status">
+                </div>
+                <div class="checkbox-group">
+                    <label for="yalageba">ያላገባ</label>
+                    
+                    <input placeholder="ያላገባ" type="radio" name="marriage" id="yalageba" name="marriage_status">
+                </div>
+                <div class="checkbox-group">
+                    <label for="mnkusna">ምንኩስና</label>
+
+                    <input placeholder="ምንኩስና" type="radio" name="marriage" id="mnkusna" name="marriage_status">
+                </div>
+            </div>
+        </div>
+        <div class="DemoPh">
+            <h5 class="hh5">* የአኗኗር ሁኔታ</h5>
+
+            <div class="checkbox-container">
+                <div class="checkbox-group">
+                    <label for="welaj">ከወላጅ ጋር</label>
+
+                    <input placeholder="ከወላጅ ጋር" type="radio" name="living" id="welaj" name="living_with">
+                </div>
+                <div class="checkbox-group">
+                    <label for="zemed">ከዘመድ ጋር</label>
+
+                    <input placeholder="ከዘመድ ጋር" type="radio" name="living" id="zemed" name="living_with">
+                </div>
+                <div class="checkbox-group">
+                    <label for="bcha">ለብቻ</label>
+
+                    <input placeholder="ለብቻ" type="radio" name="living" id="bcha" name="living_with">
+                </div>
+            </div> 
+        </div>
+            <div class="DemoPh"> 
+                <h4 class="hh4">* ከዚህ በፊት መንፈሳዊ አገልግሎት ያገለገሉበት 
+                አጥቢያ ቤ/ክ ሰንበት ት/ቤት ወይንም ማህበር</h4>
+               
+                <div class="checkbox-container">
+                    <div class="checkbox-group">
+                        <label for="ale">አለ</label>
+
+                        <input placeholder="አለ" type="radio" name="sunday" id="ale" name="spiritual_service_before">
+                    </div>
+                    <div class="checkbox-group">
+                        <label for="yelem">የለም</label>
+
+                        <input placeholder="የለም" type="radio" name="sunday" id="yelem" name="spiritual_service_before">
+                    </div>
+                   
+                </div> 
+            </div>
+            <div class="DemoPh"> 
+                <div class="DemoPh1">
+                    <label for="kalesmu">ካለ የቤተ ክርስቲያኑ ስም</label>
+              
+                    <input placeholder="የቤተ ክርስቲያኑ ስም" id="kalesmu" name="spiritual_service_place_name">
+                </div> 
+            </div>
+            <div class="DemoPh"> 
+                <h4 class="hh4">* በሰንበት ት/ቤቱ ካሉ ክፍሎች ውስጥ ገብተው
+                ሊያገለግሉበት የሚፈልጉት ክፍል</h4>
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label>1ኛ</label>
+
+                        <input placeholder="1ኛ" name="service_option_part1">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>2ኛ</label>
+
+                        <input placeholder="2ኛ" name="service_option_part2">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>3ኛ</label>
+
+                        <input placeholder="3ኛ" name="service_option_part3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kalkidan">
+            <div class="sraaa">
+                <p>እኔ <textarea placeholder="ስም እስከ አባት" name="full_name"></textarea> የተባልኩ በደብረ ምህረት ቅድስት ኪዳነ ምህረት 
+                    እና ደብረ ቀራንዮ መድሃኔአለም ቤተ ክርስቲያን 
+                በመሰረት ህይወት ሰ/ት/ቤት አማካኘነት ጌታቸን መድሃኒታችን 
+                ኢየሱስ ክርስቶስ በደሙ የመሰረታትንና አባቶቻችን ሀዋርያት የሰበኩላትን፣
+                ሰባ ሁለቱ አርድእት በአለም ሁሉ ያደረሷትን፣ ከዚያም ሃይማኖታቸው የቀና
+                318 ሊቃውንት ያጸኗትን ሃይማኖት፣ ጻድቅን ሰማእታት ህይወታቸውን
+                የሰዉላትን፣ ቅዱሳን መላእክት የጠብቋትን የቀናችና የጸናች ሃይማኖት 
+                መቅድም በሆነች ኦርቶዶክስ ተዋህዶ እምነት መሰረታዊ ትምህርት ተምሬ
+                የሰንበት ት/ቤቱ የአባልነት መተዳደሪያ ደንብ ተነቦልኝ በአባልነት በመመዝገቤ
+                የተሰማኝን ደስታ እገልጻለሁ። </p>
+                <p>
+                    ከእንግዲህ በህይወት ዘመኔ ሁሉ እንደ እግዜብሄር ፈቃድ አካሄዴን
+                    በእግዚአብሄር ፊት በማድረግና በህጉ በመገዛት የእገዚአብሄርን ቃል
+                    እያደምጥኩ በስነ ምግባር ህይወቴን በማነጽ ከመንፈሳዊ ስራ ሳልለይ
+                    አቅሜ በሚፈቅደው ሁሉ በሰንበት ት/ቤቱ ለማገልገልና የአባልነት ግዴታዬን
+                    ለመወጣት እችል ዘንድ የጌታችን የመድሃኒታችን የኢየሱስ ክርስቶስ የባህርይ 
+                    አምላክነት የስላሴ አንድነትና ሶስትነት የእመቤታችን የቅድስት ድንግል ማርያም
+                    የጻድቃን ሰማእታት አማላጅነትንና ተራዳኢነትን በማመን በጌታችን በመድሃኒታችን
+                    በኢየሱስ ክርስቶስ ስም ቃል ኪዳን ገብቻለሁ።
+                </p> 
+            </div>
+            <div class="DemoPh"> 
+                <h4 class="hh4">* በአባሉ የሚሞላ የቅርብ ተጠሪ</h4>
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label>1ኛ ስም</label>
+
+                        <input placeholder="1ኛ ስም" name="relatives_name1">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>2ኛ ስም</label>
+
+                        <input placeholder="2ኛ ስም" name="relatives_name2">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>3ኛ ስም</label>
+
+                        <input placeholder="3ኛ ስም" name="relatives_name3">
+                    </div>
+                </div>
+            </div>
+            <div class="DemoPh"> 
+                <div class="inputbox-container">
+                    <div class="inputbox-group">
+                        <label>1ኛ ስልክ</label>
+
+                        <input placeholder="1ኛ ስልክ" name="relatives_phone1">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>2ኛ ስልክ</label>
+
+                        <input placeholder="2ኛ ስልክ" name="relatives_phone2">
+                    </div>
+                    <div class="inputbox-group">
+                        <label>3ኛ ስልክ</label>
+
+                        <input placeholder="3ኛ ስልክ" name="relatives_phone3">
+                    </div>
+                 
+                </div>
+            </div>
+            <div>
+                <div class="inputbox-group">
+                    <label>የምዝገባ አመት</label>
+
+                    <input placeholder="የምዝገባ አመት" type="number" id="registration_year"  style="width: 120px;" min="1980" max="2200" name="registration_year" required>
+                </div>
+            </div>
+            <div class="submit">
+                <button type="submit" id="submitBtn">ጨርስ</button>
+            </div>
+        </div>
+    </form>
+
+
+    <script>
+        const yearSelect = document.getElementById('years');
+        const startYear = 1900;
+        const endYear = 2200;
+    
+        // Populate year selection
+        if (yearSelect) {
+            for (let year = startYear; year <= endYear; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year; // Set the display text
+                yearSelect.appendChild(option);
+            }
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('signupForm');
+    
+            // Event listener for file input to show a preview
+            document.getElementById('fileInput').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('profileImg').src = e.target.result; // Update the image source to show the selected file
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+    
+            // Handle form submission
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault(); // Prevent the default form submission
+    
+                const fileInput = document.getElementById('fileInput');
+                if (!fileInput.files.length) {
+                    alert('Please select a file to upload.'); // Check if a file is selected
+                    return; // Prevent form submission
+                }
+    
+                const userRole = await getUserRole(); // Fetch user role
+                console.log("Fetched User Role:", userRole);
+    
+                // Check if the user has permission to submit
+                if (!hasPermission(userRole, 'submit')) {
+                    alert("ይህንን መረጃ ወደ መረጃ ቋት መላክ አይችሉም። ለተጠሪዎ ያመልክቱ።");
+                    console.error("User does not have permission to submit.");
+                    return; // Exit if no permission
+                }
+    
+                const formData = new FormData(form); // Create FormData object
+    
+                // Log FormData for debugging
+                console.log("Form Data Being Sent:");
+                for (const [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+    
+                const token = localStorage.getItem('token'); // Get the token from localStorage
+    
+                // Send data to the server
+                fetch('http://127.0.0.1:15080/submit-form', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token // Include the token in the headers
+                    },
+                    body: formData, // Form data including the file
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => { throw new Error(err.message); });
+                    }
+                    return response.json();
+                })
+                .then(result => {
+                    if (result.status === 'success') {
+                        alert('Data submitted successfully!'); // Show success alert
+                        form.reset(); // Reset the form for new submission
+                        document.getElementById('profileImg').src = 'uploads/default.jpg'; // Reset the profile image
+                    } else {
+                        alert(`Data not submitted: ${result.message}`);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert(`Data not submitted. Error: ${error.message}`);
+                });
+            });
+    
+            // Function to get user role
+            async function getUserRole() {
+                const token = localStorage.getItem('token');
+                console.log("Token:", token); // Log the token
+                if (!token) return 'normal_user'; // Default if no token
+    
+                try {
+                    const response = await fetch("http://127.0.0.1:15080/user/role", {
+                        method: "GET",
+                        headers: { "Authorization": token }
+                    });
+    
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.role || 'normal_user';
+                    } else {
+                        return 'normal_user';
+                    }
+                } catch (error) {
+                    console.error("Error fetching user role:", error);
+                    return 'normal_user';
+                }
+            }
+    
+            // Function to check permissions
+            function hasPermission(userRole, action) {
+                const permissions = {
+                    submit: ['admin', 'super_admin'] // Allowed roles for submitting
+                };
+                console.log("User Role:", userRole, "Action:", action); // Log the role and action
+                return permissions[action] && permissions[action].includes(userRole);
+            }
+        });
+    </script>
+
+    </body>
+   
+</html>

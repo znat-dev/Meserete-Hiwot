@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+       .service {
+    list-style-type: none;
+    padding: 0;
+}
+
+.service > li {
+    position: relative;
+    display: inline-block;
+}
+
+.service a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: white; /* White background */
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.service li:hover .dropdown {
+    display: block; /* Show dropdown on hover */
+}
+
+.dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown li {
+    width: 150px;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown a:hover {
+    background-color: #f1f1f1; /* Light gray on hover */
+}
+
+.hero {
+    background-image: url('uploads/default.JPG'); /* Set your image path here */
+    background-size: cover; /* Scale the image to cover the entire section */
+    background-position: center; /* Center the image */
+    color: white; /* Text color for better contrast */
+    padding: 50px; /* Add padding for spacing */
+    text-align: center; /* Center the text */
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+   
+    color: white; /* Button text color */
+    text-decoration: none;
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* General Reset */
+body, h1, h2, p, ul, li, a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+    background-color: #F8F9FA;
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #008080;
+    color: #fff;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav ul {
+    display: flex;
+    gap: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+    background-color: #ffd700;
+    color: #008080;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #008080, #E6E6FA);
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    background-color: #008080;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #ffd700;
+    color: #008080;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #008080;
+    color: #fff;
+}
+
+footer .socials a {
+    margin: 0 10px;
+    color: #E6E6FA;
+    transition: color 0.3s;
+}
+
+footer .socials a:hover {
+    color: #E6E6FA;
+    text-decoration: underline;
+}
+
+</style>
+</head>
+    
+<body>
+    <header>
+        <div class="logo">መሰረተ ህይወት ሰ/ት/ቤት</div>
+        <nav>
+            <ul class="service">
+                <li><a href="userHome.html">ዋና ገጽ</a></li>
+                <li><a href="#services">አገልግሎት</a>
+                    <ul class="dropdown">
+                        <li><a href="#service1">ትምህርት</a></li>
+                        <li><a href="#service2">ዝማሬ</a></li>
+                        <li><a href="#service3">ትሩፋት</a></li>
+                    </ul></li>
+                    <li><a href="#contact">አግኙን</a>
+                        <ul class="dropdown">
+                            <li><a href="#service1">Youtube</a></li>
+                            <li><a href="#service1">Tiktok</a></li>
+                            <li><a href="#service2">Instagram</a></li>
+                            <li><a href="#service3">Telegram</a></li>
+                        </ul></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>በስም አብ ወወልድ ወመንፈስ ቅዱስ አሐዱ አምላክ አሜን!</h1>
+        <p>“ጌታ ቢፈቅድ ብንኖርም ይህን ወይም ያን እናደርጋለን”<br>
+            የያዕቆብ መልእክት 4፡15</p>
+            <h2>እንኳን ደህና መጡ!</h2><br>
+        <a href="userHome.html" class="cta-button">ይጎብኙን</a>
+
+        <div class="side-div left" id="left-div">
+            <h2> ተልእኮ</h2>
+            <p>
+                በኮተቤ ኪዳነ ምህረትና መድኃዓለም ቤተ ክርስቲያን አጥቢያ ለሚገኙ አባላትና ምዕመናን የቤተ ክርስቲያንን
+                 መሰረታዊ ትምህርት በማስተማር፣ ያሬዳዊ ዝማሬን በማስጠናት፣ መንፈሳዊ አገልግሎቶችን በመስጠት፣ 
+                 ማህበራዊና ኢኮኖሚያዊ  መርሐ-ግበር በመዘርጋት የአባላትና የምዕመናን  ሕይወትን በማሻሻል ዘመኑን 
+                 የዋጀ  ክርስቲያን መፍጠር ነው፡፡
+                </p>
+        </div>
+        <div class="side-div right" id="right-div">
+            <h2>ርዕይ</h2>
+            <p> “ዘመኑን የዋጀ መንፈሳዊ ትውልድ የሚፈራበት የሊቃውንት አስተምህሮ የትምህርት ማዕከል ሆኖ መገኘት” </p>
+        </div>
+    </section>
+    <section class="content">
+        <div class="content-block">
+            <h2> ተልእኮ</h2>
+            <p>
+                በኮተቤ ኪዳነ ምህረትና መድኃዓለም ቤተ ክርስቲያን አጥቢያ ለሚገኙ አባላትና ምዕመናን የቤተ ክርስቲያንን
+                 መሰረታዊ ትምህርት በማስተማር፣ ያሬዳዊ ዝማሬን በማስጠናት፣ መንፈሳዊ አገልግሎቶችን በመስጠት፣ 
+                 ማህበራዊና ኢኮኖሚያዊ  መርሐ-ግበር በመዘርጋት የአባላትና የምዕመናን  ሕይወትን በማሻሻል ዘመኑን 
+                 የዋጀ  ክርስቲያን መፍጠር ነው፡፡
+                </p>
+        </div>
+        <div class="content-block">
+            <h2>ርዕይ</h2>
+            <p> “ዘመኑን የዋጀ መንፈሳዊ ትውልድ የሚፈራበት የሊቃውንት አስተምህሮ የትምህርት ማዕከል ሆኖ መገኘት” </p>
+            
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2017 መሰረተ ህይወት ሰ/ት/ቤት።<br> መብቱ የተጠበቀ ነው።</p>
+        <div class="socials">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+        </div>
+    </footer>
+    <script>
+            document.getElementById('toggle-button').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default anchor behavior
+        const leftDiv = document.getElementById('left-div');
+        const rightDiv = document.getElementById('right-div');
+
+        // Toggle visibility of the divs
+        if (leftDiv.classList.contains('visible')) {
+            // Hide divs and redirect to userHome.html
+            leftDiv.classList.remove('visible');
+            rightDiv.classList.remove('visible');
+            setTimeout(() => {
+                window.location.href = this.href; // Redirect after animation
+            }, 500); // Match the duration of the CSS transition
+        } else {
+            // Show divs
+            leftDiv.classList.add('visible');
+            rightDiv.classList.add('visible');
+        }
+    });
+    </script>
+
+</body>
+</html>
+
+
+
+

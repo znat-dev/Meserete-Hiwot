@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Form Data</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 2px solid  #0072bc;
+            padding: 8px;
+            text-align: center;
+            color: #0072bc;
+        }
+        input {
+            width: 90%;
+        }
+        th.column-name {
+            border-right: none; /* Remove all borders */
+            font-size: 12px;
+            font-weight:bolder ;
+        }
+        th.name-column {
+            border-left: none; /* Remove all borders */
+        }
+        .save-butu, .edit-butu {
+            color: #fff;
+            border: 2px solid #0072bc;
+            background-color: #0072bc;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        .save-butu:hover, .edit-butu:hover {
+            color: #0072bc;
+            border: 2px solid #0072bc;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>የውስጥ ግንኙንት የአባላት ቅጽ እድሳት</h1>
+<table id="data-table">
+    <thead>
+        <tr>
+            <th class="column-name">ምስል</th>
+            <th class="name-column"></th>
+            <th class="column-name">ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">የአባት ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">የአያት ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">የትውልድ ዘመን አ.ም</th>
+            <th class="name-column"></th>
+            <th class="column-name">ወር</th>
+            <th class="name-column"></th>
+            <th class="column-name">ቀን</th>
+            <th class="name-column"></th>
+            <th class="column-name">የመኖሪያ አድራሻ ክ/ከተማ</th>
+            <th class="name-column"></th>
+            <th class="column-name">ወረዳ</th>
+            <th class="name-column"></th>
+            <th class="column-name">የቤት ቁጥር</th>
+            <th class="name-column"></th>
+            <th class="column-name">የሞባይል ስልክ</th>
+            <th class="name-column"></th>
+            <th class="column-name">ተለዋጭ ስልክ</th>
+            <th class="name-column"></th>
+            <th class="column-name">ኢ-ሜይል</th>
+            <th class="name-column"></th>
+            <th class="column-name">የክርስትና ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">የንስሐ አባት ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">የሚያገለግሉበት ደብር</th>
+            <th class="name-column"></th>
+            <th class="column-name">የትምህርት ሁኔታ ከ1-8</th>
+            <th class="name-column"></th>
+            <th class="column-name">ከ9-10</th>
+            <th class="name-column"></th>
+            <th class="column-name">ከ11-12</th>
+            <th class="name-column"></th>
+            <th class="column-name">ኮሌጅ/ዩኒቨርሲቲ 1ኛ. ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">ከ(አም)</th>
+            <th class="name-column"></th>
+            <th class="column-name">እስከ(አም)</th>
+            <th class="name-column"></th>
+            <th class="column-name">2ኛ. ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">ከ(አም)</th>
+            <th class="name-column"></th>
+            <th class="column-name">እስከ(አም)</th>
+            <th class="name-column"></th>
+            <th class="column-name">3ኛ. ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">ከ(አም)</th>
+            <th class="name-column"></th>
+            <th class="column-name">እስከ(አም)</th>
+            <th class="name-column"></th>
+            <th class="column-name">የተመረቁበት ሙያ</th>
+            <th class="name-column"></th>
+            <th class="column-name">1ኛ</th>
+            <th class="name-column"></th>
+            <th class="column-name">2ኛ</th>
+            <th class="name-column"></th>
+            <th class="column-name">3ኛ</th>
+            <th class="name-column"></th>
+            <th class="column-name">አሁን በመማር ላይ ከሆኑ የሚማሩበት ትምህርት ዘርፍ/ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">አሁን በመማር ላይ ከሆኑ የሚማሩበት ትምህርት ቤት ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">የስራ ሁኔታ</th>
+            <th class="name-column"></th>
+            <th class="column-name">የመስሪያ ቤቱ ስምና አድራሻ</th>
+            <th class="name-column"></th>
+            <th class="column-name">የጋብቻ ሁኔታ</th>
+            <th class="name-column"></th>
+            <th class="column-name">የአኗኗር ሁኔታ ከወላጅ ጋር</th>
+            <th class="name-column"></th>
+            <th class="column-name">ከዚህ በፊት መንፈሳዊ አገልግሎት ያገለገሉበት 
+                አጥቢያ ቤ/ክ ሰንበት ት/ቤት ወይንም ማህበር</th>
+            <th class="name-column"></th>
+            <th class="column-name">በሰንበት ት/ቤቱ ካሉ ክፍሎች ውስጥ ገብተው
+                ሊያገለግሉበት የሚፈልጉት ክፍል 1ኛ</th>
+            <th class="name-column"></th>
+            <th class="column-name">2ኛ</th>
+            <th class="name-column"></th>
+            <th class="column-name">3ኛ</th>
+            <th class="name-column"></th>
+            <th class="column-name">ስም እስከ አባት</th>
+            <th class="name-column"></th>
+            <th class="column-name">የቅርብ ተጠሪ 1ኛ ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">2ኛ ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">3ኛ ስም</th>
+            <th class="name-column"></th>
+            <th class="column-name">1ኛ ስልክ</th>
+            <th class="name-column"></th>
+            <th class="column-name">2ኛ ስልክ</th>
+            <th class="name-column"></th>
+            <th class="column-name">3ኛ ስልክ</th>
+            <th class="name-column"></th>
+            <th class="column-name">የምዝገባ አመት</th>
+            <th class="name-column"></th>
+            <th>Id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Data will be populated here -->
+    </tbody>
+</table>
+
+<script>
+    async function fetchData() {
+        const response = await fetch('http://localhost:15080/api/form_data');
+        const data = await response.json();
+        const tableBody = document.querySelector('#data-table tbody');
+        tableBody.innerHTML = '';
+
+        // Populate the table
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            Object.entries(item).forEach(([key, value]) => {
+                const cell = document.createElement('td');
+                cell.textContent = value;
+                row.appendChild(cell);
+
+                // Create edit button for each column except the 'id'
+                if (key !== 'id') {
+                    const editCell = document.createElement('td');
+                    const editButton = document.createElement('button');
+                    editButton.textContent = 'ቀይር';
+                    editButton.className = 'edit-butu'; // Add class to the edit button
+                    editButton.onclick = () => openEditField(cell, item.id, key);
+                    editCell.appendChild(editButton);
+                    row.appendChild(editCell);
+                }
+            });
+            tableBody.appendChild(row);
+        });
+    }
+
+    function openEditField(cell, id, columnName) {
+        const input = document.createElement('input');
+        input.value = cell.textContent;
+
+        // Clear the cell for other fields
+        cell.innerHTML = '';
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'አስቀምጥ';
+        saveButton.className = 'save-butu'; // Add class to the save button
+        saveButton.onclick = async () => {
+            const updatedValue = input.value;
+            cell.textContent = updatedValue; // Update displayed value
+
+            // Send the updated data to the server
+            const response = await fetch(`http://localhost:15080/api/form_data/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ [columnName]: updatedValue })
+            });
+
+            if (response.ok) {
+                alert('Data updated successfully');
+                fetchData(); // Refresh data
+            } else {
+                alert('Error updating data: ' + await response.text());
+            }
+        };
+
+        cell.appendChild(input);
+        cell.appendChild(saveButton);
+        input.focus();
+    }
+
+    // Fetch data on page load
+    window.onload = fetchData;
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    <style>
+        select {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            color: #0072bc;
+            overflow: auto; /* Allow browser scrolling */
+        }
+
+        .content-display {
+            margin-top: 20px; /* Space between select and content */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            display: none; /* Initially hidden */
+            height: 700px; /* Set a height for the iframe */
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            overflow: hidden;
+        }
+        .cake {
+            color: #0072bc;
+            font-weight: bolder;
+        }
+        .caku {
+            color: #0072bc;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="cake">የመዝሙር ክፍል ተማሪዎች</h2>
+    <label class="caku" for="optionsSelect">ክፍል ይምረጡ:</label>
+    <select id="optionsSelect" onchange="displayContent()">
+        <option value="">ምረጡ...</option>
+        <option value="kalayMusicCourse.html">ካልአይ</option>
+        <option value="salsayMusicCourse.html">ሳልሳይ</option>
+        <option value="maekelawyanMusicCourse.html">ማእከላውያን</option>
+        <option value="kuamiMusicCourse.html">ቋሚ መዘምራን</option>
+    </select>
+    <div class="content-display" id="contentDisplay">
+        <iframe id="contentFrame4" src="" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        function displayContent() {
+            const selectElement = document.getElementById('optionsSelect');
+            const selectedValue = selectElement.value;
+            const contentDisplay = document.getElementById('contentDisplay');
+            const contentFrame = document.getElementById('contentFrame4');
+
+            if (selectedValue) {
+                contentFrame.src = selectedValue; // Set the source of the iframe to the selected link
+                contentDisplay.style.display = 'block'; // Show the content box
+            } else {
+                contentFrame.src = ""; // Clear the iframe source
+                contentDisplay.style.display = 'none'; // Hide if no valid option is selected
+            }
+        }
+    </script>
+</body>
+</html>

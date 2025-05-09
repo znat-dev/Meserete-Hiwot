@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    <link rel="shortcut icon" type="x-icon" href="WhiteImage.jpg">
+    <style>
+        body {
+            background-image: url('MHSS.png'); /* Set your image path here */
+            background-size: contain; /* Scale the image to cover the entire section */
+            background-repeat: no-repeat;
+            background-size: 60%;
+            background-position: center; /* Center the image */
+            animation: bounce 10s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0% {
+                background-position: -100% center; /* Start off-screen on the left */
+            }
+            40% {
+                background-position: 50% center; /* Move to the center */
+            }
+            100% {
+                background-position: 200% center; /* Reset to the left */
+            }
+        }
+
+        .main {
+            margin: 10% auto;
+            padding: 50px;
+            background-color: #0072bc;
+            border-radius: 10px;
+            box-shadow: 2px 0 10px rgb(0,0,0);
+            width: 300px; /* Set a width for the container */
+            opacity: 0.9;
+        }
+        .input {
+            margin: 10px;
+        }
+        .mainInput {
+            width: 100%; /* Make input fields full width */
+            height: 30px;
+            border: none;
+            background-color: rgb(255, 255, 255);
+            border-radius: 3px;
+        }
+        button {
+            background-color: #ffffff;
+            color: #0072bc;
+            margin-top: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            width: 100%; /* Make button full width */
+            border: none;
+        }
+        button:hover {
+            background-color: #ffc527;
+            color: #0072bc;
+            border: none;
+        }
+        ::placeholder {
+            font-size: larger;
+        }
+        .error {
+            color: #ffc527; /* Style for error messages */
+            margin-top: 10px;
+        }
+        p {
+            margin-top: 20px;
+        }
+        .Remember {
+            color: white;
+            margin: 10px;
+            margin-bottom: 0px;
+            margin-top: 20px;
+        }
+        .Remember a {
+            color: white;
+           margin-left: 30px;
+           text-decoration: none;
+        }
+        .Remember a:hover {
+            text-decoration: underline;
+        }
+        .dont {
+            margin: 10px;
+            color: white;
+        }
+        .dont p {
+            margin-left: 5px;
+        }
+        .dont a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: white;
+        }
+        .dont a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: 30px;
+            margin-top: 0px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>ይግቡ</h1>
+        <form id="loginForm">
+            <div class="input">
+                <input class="mainInput" type="text" id="username" placeholder="ስም" required>
+            </div>
+            <div class="input">
+                <input class="mainInput" type="password" id="password" placeholder="ሚስጥር ቁጥር" required>
+            </div>
+            <div class="Remember">
+                <label><input type="checkbox">አስታውሰኝ</label>
+                <a href="forgetPassword.html">የተረሳ ሚስጥር ቁጥር?</a>
+            </div>
+            <button type="submit">ይግቡ</button>
+
+           
+            <p id="errorMessage" class="error"></p> <!-- Error message display -->
+        </form>
+    </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let errorMessage = document.getElementById("errorMessage");
+
+            fetch("http://localhost:15080/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: username, password: password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    localStorage.setItem('token', data.token); // Store token
+                    window.location.href = "member.html"; // Redirect to member page
+                } else {
+                    errorMessage.textContent = data.message;
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                errorMessage.textContent = "Server error. Please try again later.";
+            });
+        });
+        
+
+        </script>
+</body>
+</html>
+

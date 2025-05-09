@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>የክፍሎች እቅድ ማሳያ</title>
+    <style>
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            background-color: #f4f4f4;
+            color: #0072bc;
+        }
+        th {
+            background-color: #fff;
+            font-weight: bold;
+            color: #0072bc;
+        }
+        select, button {
+            padding: 5px;
+            margin: 5px;
+            color: #0072bc;
+            border: none;
+        }
+        select {
+            border: 1px solid #0072bc;
+        }
+        .tutu {
+            color: #fff;
+            background-color: #0072bc;
+            border-color: none;
+        }
+        .tutu:hover {
+            background-color: #fff;
+            color: #0072bc;
+            border: 2px solid #0072bc;
+        }
+        .popo {
+            color: #0072bc;
+        }
+        .okon {
+            background-color: #0072bc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .okon:hover {
+            background-color: #fff;
+            color: #0072bc;
+            border: 2px solid #0072bc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="popo">የክፍሎች እቅድ ማሳያ</h1>
+    <label for="planType" class="popo">ክፍል ይምረጡ :</label>
+    <select id="planType">
+        <option value="main">ጽሕፈት ቤት</option>
+        <option value="education">ትምህርት ክፍል</option>
+        <option value="music">መዝሙር ክፍል</option>
+        <option value="art">ኪነ ጥበብ ክፍል</option>
+        <option value="development">ልማት ክፍል</option>
+        <option value="communication">የውስጥ ግንኙነት ክፍል</option>
+        <option value="aid">በጎ አድራጎት ክፍል</option>
+        <option value="documentation">ዶክመንቴሽን ክፍል</option>
+        <option value="kid">ህጻናት ክፍል</option>
+        <option value="old">ምክረ አበው ክፍል</option>
+        <option value="train">ስልጠናና መርሐ ቤት</option>
+        <option value="research">ጥናትና ምርምር ክፍል</option>
+        <option value="out">ውጪ ግንኙነት ክፍል</option>
+    </select>
+    <button class="tutu" onclick="loadPlans()">እቅድ አሳይ</button>
+    
+    <h2 class="popo">የክፍሉ እቅድ</h2>
+    <table id="planTable">
+        <thead>
+            <tr>
+                <th>አይነት</th>
+                <th>ብዛት</th>
+                <th>መስ</th>
+                <th>ጥቅ</th>
+                <th>ህዳ</th>
+                <th>ታህ</th>
+                <th>ጥር</th>
+                <th>የካ</th>
+                <th>መጋ</th>
+                <th>ሚያ</th>
+                <th>ግን</th>
+                <th>ስኔ</th>
+                <th>ሐም</th>
+                <th>ነሐ</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        function loadPlans() {
+            const planType = document.getElementById("planType").value;
+            fetch(`http://localhost:15080/${planType}_plans`)
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.querySelector("#planTable tbody");
+                    tbody.innerHTML = ""; // Clear old data
+                    
+                    data.forEach(plan => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${plan.type}</td>
+                            <td>${plan.quantity}</td>
+                            ${plan.checkboxes.map((val, index) => `
+                                <td><input type="checkbox" ${val ? "checked" : ""}></td>
+                            `).join("")}
+                            <td><button class="okon" onclick="confirmDeletePlan('${planType}', ${plan.id})">ሰርዝ</button></td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error("Error fetching plans:", error));
+        }
+    
+        async function confirmDeletePlan(planType, id) {
+            const userRole = await getUserRole(); // Fetch user role before deletion
+            if (!hasPermission(userRole, 'delete')) {
+                alert("እቅዱን መሰረዝ አይችሉም። ለተጠሪ ያመልክቱ።"); // Show alert if not allowed
+                console.error("User does not have permission to delete.");
+                return; // Exit if no permission
+            }
+    
+            // Confirm deletion
+            const confirmation = confirm("በእርግጥ እቅዱን መሰረዝ ይፈልጋሉ?");
+            if (confirmation) {
+                deletePlan(planType, id);
+            }
+        }
+    
+        function deletePlan(planType, id) {
+            fetch(`http://localhost:15080/${planType}_plans/${id}`, { method: "DELETE" })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    loadPlans(); // Refresh the plan table
+                })
+                .catch(error => console.error("Error deleting plan:", error));
+        }
+    
+        async function getUserRole() {
+            const token = localStorage.getItem('token');
+            if (!token) return 'normal_user'; // Default if no token
+    
+            try {
+                const response = await fetch("http://localhost:15080/user/role", {
+                    method: "GET",
+                    headers: { "Authorization": token }
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.role || 'normal_user';
+                } else {
+                    return 'normal_user';
+                }
+            } catch (error) {
+                console.error("Error fetching user role:", error);
+                return 'normal_user';
+            }
+        }
+    
+        function hasPermission(userRole, action) {
+            const permissions = {
+                delete: ['admin', 'super_admin']
+            };
+            return permissions[action] && permissions[action].includes(userRole);
+        }
+    </script>
+
+</body>
+</html>

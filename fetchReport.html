@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    <style>
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            background-color: #f4f4f4;
+            color: #0072bc;
+        }
+        th {
+            background-color: #fff;
+            font-weight: bold;
+            color: #0072bc;
+        }
+        td, button {
+            color: #0072bc;
+        }
+        .td {
+            border-color: #0072bc;
+            border-radius: 5px;
+        }
+        select, button {
+            padding: 5px;
+            margin: 5px;
+            border: none;
+            color: #0072bc;
+        }
+       
+        .las {
+            color: #0072bc;
+        }
+        .lass {
+            color: #0072bc;
+        }
+        .lasss {
+            color: #0072bc;
+        }
+        #reportType {
+            color: #0072bc;
+            border: 1px solid #0072bc;
+        }
+       #reportType:focus {
+        color: #0072bc;
+        background-color: #fff;
+       }
+       .tutu {
+        color: #fff;
+        background-color: #0072bc;
+        border-color: none;
+       }
+       #reportType option {
+        background-color: white;
+        color: #0072bc;
+       
+       }
+       #reportType option:checked {
+        background-color: #0072bc;
+        color: white;
+       }
+      
+       .tutu:hover {
+        color: #0072bc;
+        background-color: #fff;
+        border: 2px solid #0072bc;
+       }
+       .opo:hover {
+        background-color: #debff3;
+       }
+       .okono {
+            background-color: #0072bc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .okono:hover {
+            background-color: #fff;
+            color: #0072bc;
+            border: 2px solid #0072bc;
+            border-radius: 5px;
+        }
+      
+    </style>
+</head>
+<body>
+
+    <h1 class="las">የክፍሎች ሪፖርት ማሳያ</h1>
+    <label for="reportType" class="lass">ክፍል ይምረጡ:</label>
+    <select  id="reportType">
+        <option class="opo" value="main">ጽሕፈት ቤት</option>
+        <option value="education">ትምህርት ክፍል</option>
+        <option value="music">መዝሙር ክፍል</option>
+        <option value="art">ኪነ ጥበብ ክፍል</option>
+        <option value="development">ልማት ክፍል</option>
+        <option value="communication">የውስጥ ግንኙነት ክፍል</option>
+        <option value="aid">በጎ አድራጎት ክፍል</option>
+        <option value="documentation">ዶክመንቴሽን ክፍል</option>
+        <option value="kid">ህጻናት ክፍል</option>
+        <option value="old">ምክረ አበው ክፍል</option>
+        <option value="train">ስልጠናና መርሐ ቤት</option>
+        <option value="research">ጥናትና ምርምር ክፍል</option>
+        <option value="out">ውጪ ግንኙነት ክፍል</option>
+    </select>
+    <button class="tutu" onclick="loadReport()">ሪፖርት አሳይ</button>
+    
+    <h2 class="lasss">የክፍሉ ሪፖርት</h2>
+    <table id="reportTable">
+        <thead>
+            <tr>
+                <th>የእቅዱ አይነት</th>
+                <th>የታቀደው መጠን</th>
+                <th>የተሰራው መጠን</th>
+                <th>ምርመራ</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // Function to load reports based on the selected type
+        function loadReport() {
+            const reportType = document.getElementById("reportType").value;
+            fetch(`http://localhost:15080/${reportType}_reports`)
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.querySelector("#reportTable tbody");
+                    tbody.innerHTML = ""; // Clear old data
+                    
+                    data.forEach(report => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${report['የእቅዱ_አይነት']}</td>
+                            <td>${report['የታቀደው_መጠን']}</td>
+                            <td>${report['የተሰራው_መጠን']}</td>
+                            <td>${report['ምርመራ']}</td>
+                            <td><button class="okono" onclick="confirmDeleteReport('${reportType}', ${report.id})">ሰርዝ</button></td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error("Error fetching reports:", error));
+        }
+    
+        // Function to confirm deletion of a report
+        async function confirmDeleteReport(reportType, id) {
+            const userRole = await getUserRole(); // Fetch user role before deletion
+            if (!hasPermission(userRole, 'delete')) {
+                alert("እቅዱን መሰረዝ አይችሉም። ለተጠሪ ያመልክቱ።"); // Show alert if not allowed
+                console.error("User does not have permission to delete.");
+                return; // Exit if no permission
+            }
+    
+            // Confirm deletion
+            const confirmation = confirm("በእርግጥ ሪፖርቱን መሰረዝ ይፈልጋሉ?");
+            if (confirmation) {
+                deleteReport(reportType, id);
+            }
+        }
+    
+        // Function to delete a report by ID
+        function deleteReport(reportType, id) {
+            fetch(`http://localhost:15080/${reportType}_reports/${id}`, { method: "DELETE" })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    loadReport(); // Refresh the report table
+                })
+                .catch(error => console.error("Error deleting report:", error));
+        }
+    
+        // Function to get user role
+        async function getUserRole() {
+            const token = localStorage.getItem('token');
+            if (!token) return 'normal_user'; // Default if no token
+    
+            try {
+                const response = await fetch("http://localhost:15080/user/role", {
+                    method: "GET",
+                    headers: { "Authorization": token }
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.role || 'normal_user';
+                } else {
+                    return 'normal_user';
+                }
+            } catch (error) {
+                console.error("Error fetching user role:", error);
+                return 'normal_user';
+            }
+        }
+    
+        // Function to check permissions
+        function hasPermission(userRole, action) {
+            const permissions = {
+                delete: ['admin', 'super_admin']
+            };
+            return permissions[action] && permissions[action].includes(userRole);
+        }
+    
+        // Attach the loadReport function to the button click
+        document.querySelector(".tutu").onclick = loadReport; // Adjust selector if needed
+    </script>
+
+</body>
+</html>

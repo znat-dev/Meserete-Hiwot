@@ -1,0 +1,84 @@
+
+/* General Reset */
+body, h1, h2, p, ul, li, a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+    background-color: #F8F9FA;
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #a14772;
+    color: #fff;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav ul {
+    display: flex;
+    gap: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+    background-color: #ffd700;
+    color: #a14772;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Hero Section */
+
+
+.hero h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #a14772;
+    color: #fff;
+}
+
+footer .socials a {
+    margin: 0 10px;
+    color: #E6E6FA;
+    transition: color 0.3s;
+}
+
+footer .socials a:hover {
+    color: #E6E6FA;
+    text-decoration: underline;
+}
+

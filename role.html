@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    <link rel="shortcut icon" type="x-icon" href="WhiteImage.jpg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            color: #0072bc;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #0072bc;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .success {
+            color: #0072bc;
+        }
+        .error {
+            color: #ffc527;
+        }
+        button {
+            background-color: #0072bc;
+            color: #fff;
+            border: none;
+        }
+        button:hover {
+            background-color: #fff;
+            color: #0072bc;
+            border: 2px solid #0072bc;
+        }
+        option {
+            color: #0072bc;
+        }
+        select {
+            color: #0072bc;
+            border: 1px solid #0072bc;
+        }
+        .structure {
+            color: #0072bc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="structure">የአባላት የስራ ድርሻ መመደቢያ</h1>
+        <table id="users-table">
+            <thead>
+                <tr>
+                    <th>የመጠቀሚያ ስም</th>
+                    <th>የሚስጥር ቁጥር</th>
+                    <th>ስም</th>
+                    <th>የአባት ስም</th>
+                    <th>የስራ ድርሻ</th>
+                    <th>ድርሻ መቀየሪያ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- User rows will be populated here -->
+            </tbody>
+        </table>
+        <div id="message" class="success"></div>
+    </div>
+
+    <script>
+        const userRoles = [
+            'super_admin', 'admin', 'adminEducation', 'adminMusic', 'adminArt', 
+            'adminDevelopment', 'adminCommunication', 'adminAid', 'adminDocumentation', 
+            'adminKid', 'adminOld', 'adminTrain', 'adminResearch', 'adminOut', 
+            'sub_admin', 'sub_adminEducation', 'sub_adminMusic', 'sub_adminArt', 
+            'sub_adminDevelopment', 'sub_adminCommunication', 'sub_adminAid', 
+            'sub_adminDocumentation', 'sub_adminKid', 'sub_adminOld', 
+            'sub_adminTrain', 'sub_adminResearch', 'sub_adminOut', 
+            'member_Education', 'member_Music', 'member_Art', 
+            'member_Development', 'member_Communication', 'member_Aid', 
+            'member_Documentation', 'member_Kid', 'member_Old', 
+            'member_Train', 'member_Research', 'member_Out', 
+            'normal_user'
+        ];
+    
+        async function fetchUsers() {
+            try {
+                const response = await fetch('http://localhost:15080/users'); // Your endpoint for fetching users
+                const users = await response.json();
+    
+                const tbody = document.querySelector('#users-table tbody');
+                tbody.innerHTML = ''; // Clear existing rows
+    
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.username}</td>
+                        <td>${user.password}</td>
+                        <td>${user.name}</td>
+                        <td>${user.father_name}</td>
+                        <td>
+                            <select class="role-select" data-username="${user.username}" data-current-role="${user.role}">
+                                ${userRoles.map(role => `
+                                    <option value="${role}" ${role === user.role ? 'selected' : ''}>${role}</option>
+                                `).join('')}
+                            </select>
+                        </td>
+                        <td>
+                            <button onclick="updateRole('${user.username}')">የስራ ድርሻ ቀይር</button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+    
+        async function updateRole(username) {
+            const select = document.querySelector(`.role-select[data-username="${username}"]`);
+            const newRole = select.value;
+            const currentRole = select.getAttribute('data-current-role'); // Get the current role from the data attribute
+    
+            const userRole = await getUserRole(); // Fetch user role before updating
+    
+            // Check if the user has permission to update roles
+            if (!hasPermission(userRole, 'update_role')) {
+                alert("የስራ ድርሻ መቀየር አይችሉም።");
+                console.error("User does not have permission to update roles.");
+                return; // Exit if no permission
+            }
+    
+            // Check if the role has changed
+            if (currentRole === newRole) {
+                document.getElementById('message').innerText = 'የስራ ድርሻ አልተለወጠም።'; // Inform no change
+                return; // Exit if no change
+            }
+    
+            try {
+                const response = await fetch('http://localhost:15080/users/update-role', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('token') // Include token for authorization
+                    },
+                    body: JSON.stringify({ username, role: newRole })
+                });
+    
+                if (response.ok) {
+                    document.getElementById('message').innerText = `የ${username} የስራ ድርሻ በተሳካ ሁኔታ ተቀይሯል።`;
+                    fetchUsers(); // Refresh the user list
+                } else {
+                    document.getElementById('message').innerText = 'የስራ ድርሻ መቀየር አልተቻለም።';
+                }
+            } catch (error) {
+                console.error('Error updating role:', error);
+                document.getElementById('message').innerText = 'Error updating role';
+            }
+        }
+    
+        async function getUserRole() {
+            const token = localStorage.getItem('token');
+            if (!token) return 'normal_user'; // Default if no token
+    
+            try {
+                const response = await fetch("http://localhost:15080/user/role", {
+                    method: "GET",
+                    headers: { "Authorization": token }
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.role || 'normal_user';
+                } else {
+                    return 'normal_user';
+                }
+            } catch (error) {
+                console.error("Error fetching user role:", error);
+                return 'normal_user';
+            }
+        }
+    
+        function hasPermission(userRole, action) {
+            const permissions = {
+                update_role: ['super_admin', 'admin', 'sub_admin']
+            };
+            return permissions[action] && permissions[action].includes(userRole);
+        }
+    
+        // Fetch users on page load
+        fetchUsers();
+    </script>
+</body>
+</html>

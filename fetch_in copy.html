@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    <style>
+        #results {
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+        #results table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #results th, #results td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            color: #6A0DAD;
+            position: relative; /* For positioning edit button */
+        }
+        #results th {
+            background-color: #f2f2f2;
+            color: #6A0DAD;
+            font-weight: bolder;
+        }
+        .edit-button {
+            display: none; /* Initially hidden */
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: #e7ddee;
+            border: none;
+            cursor: pointer;
+        }
+        td:hover .edit-button {
+            display: inline-block; /* Show button on hover */
+        }
+        
+        .edit-input {
+    width: calc(100% + 10px); /* Adjust width to leave space for the button */
+    display: inline-block; /* Align input and button horizontally */
+    margin-right: 10px; /* Space between input and button */
+}
+.save-button {
+    display: inline-block; /* Display button inline */
+}
+        #class-selection-modal, #edit-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid black;
+            padding: 20px;
+            display: none; /* Initially hidden */
+        }
+        li:hover {
+            background-color: #c4a7da;
+        }
+        #year {
+            width: 100px;
+        }
+        input {
+            text-align: center;
+        }
+        .sun {
+            color: #6A0DAD;
+            font-weight: bolder;
+        }
+        .hold {
+            color: #6A0DAD;
+            border-color: #c4a7da;
+            background-color: #e7ddee;
+        }
+        button:hover {
+            color: #6A0DAD;
+            background-color: white;
+        }
+        ::placeholder {
+            color: #c4a7da;
+        }
+        p {
+            color: #008080;
+            font-weight: bolder;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="sun">የሰንበት ትምህርት ቤቱ አባላት ዝርዝር መረጃ</h2>
+
+    <!-- Input for year-->
+    <label for="year" class="sun"> የምዝገባ አመት ምህረት ያስገቡ :</label>
+    <input type="number" id="year" placeholder="አመተ ምህረት" min="1900" max="2100">
+    <button id="fetch-year" class="hold">በተመዘገቡበት አመተ ምህረት ፈልግ</button>
+
+    <!-- Input for name-->
+    <label for="name" class="sun"> ስም ያስገቡ :</label>
+    <input type="text" id="name" placeholder="ለመፈለግ ስም አስገቡ">
+    <button id="fetch-name" class="hold">በስም ፈልግ</button><br><br>
+
+    <!-- Delete member -->
+    <label for="delete-name" class="sun">ስም ያስገቡ:</label>
+    <input type="text" id="delete-name" placeholder="ለመሰረዝ ስም አስገቡ">
+    
+    <label for="delete-father-name" class="sun">የአባት ስም ያስገቡ:</label>
+    <input type="text" id="delete-father-name" placeholder="ለመሰረዝ የአባት ስም አስገቡ">
+    
+    <button id="delete-button" class="hold">ስርዝ</button>
+
+    <div id="results"></div>
+
+    <div id="class-selection-modal" style="display:none;">
+        <h3>ለመመደብ ክፍል ይምረጡ</h3>
+        <ul id="class-list"></ul>
+        <button id="close-modal" class="hold">መዝጋት</button>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal">
+        <h3>የተመረጡት አባል አርትዕ</h3>
+        <label for="edit-field">የማስተካከያ መረጃ:</label>
+        <input type="text" id="edit-field" class="edit-input" placeholder="የማስተካከያ መረጃ">
+        <button id="save-edit" class="hold">ይቀይሩ</button>
+        <button id="close-edit-modal" class="hold">መዝጋት</button>
+    </div>
+
+    <script>
+        // Function to fetch and display data
+        function fetchData(year = null, name = null) {
+            let url = "http://127.0.0.1:15080/fetch-data";
+            let params = [];
+            if (year) {
+                params.push(`year=${year}`);
+            }
+            if (name) {
+                params.push(`name=${encodeURIComponent(name)}`);
+            }
+            if (params.length > 0) {
+                url += `?${params.join('&')}`;
+            }
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok: " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const resultsDiv = document.getElementById("results");
+                    resultsDiv.innerHTML = ""; // Clear previous results
+                    resultsDiv.style.display = "block"; // Show results
+
+                    if (data.length === 0) {
+                        resultsDiv.innerHTML = "<p>በተጠቀሰው አመት የተመዘገበ አባል የለም።</p>";
+                        return;
+                    }
+
+                    // Create a table to display results
+                    const table = document.createElement("table");
+                    const headerRow = document.createElement("tr");
+
+                    // Add table headers
+                    const headers = [
+                        "photo", "name", "father_name", "grandfather_name", "birth_year", "birth_month",
+                        "birth_day", "address_city", "district", "house_number", "mobile", "alternate_phone",
+                        "email", "baptism_name", "father_christian_name", "father_service_location",
+                        "education_1_8", "education_9_10", "education_11_12",
+                        "college_name1", "college_start1", "college_end1",
+                        "college_name2", "college_start2", "college_end2",
+                        "college_name3", "college_start3", "college_end3",
+                        "occupation1", "occupation2", "occupation3",
+                        "current_study_field", "current_study_institution",
+                        "work_status", "employer_name", "marriage_status",
+                        "living_with", "spiritual_service_before", "spiritual_service_place_name",
+                        "service_option_part1", "service_option_part2", "service_option_part3",
+                        "full_name",
+                        "relatives_name1", "relatives_name2", "relatives_name3",
+                        "relatives_phone1", "relatives_phone2", "relatives_phone3", "registration_year"
+                    ];
+
+                    headers.forEach(headerText => {
+                        const th = document.createElement("th");
+                        th.textContent = headerText;
+                        headerRow.appendChild(th);
+                    });
+                    table.appendChild(headerRow);
+
+                    // Populate table with data
+                    data.forEach(user => {
+                        const row = document.createElement("tr");
+                        const fields = [
+                            user.photo, user.name, user.father_name, user.grandfather_name, user.birth_year, user.birth_month,
+                            user.birth_day, user.address_city, user.district, user.house_number,
+                            user.mobile, user.alternate_phone, user.email, user.baptism_name,
+                            user.father_christian_name, user.father_service_location,
+                            user.education_1_8, user.education_9_10, user.education_11_12,
+                            user.college_name1, user.college_start1, user.college_end1,
+                            user.college_name2, user.college_start2, user.college_end2,
+                            user.college_name3, user.college_start3, user.college_end3,
+                            user.occupation1, user.occupation2, user.occupation3,
+                            user.current_study_field, user.current_study_institution, user.work_status,
+                            user.employer_name, user.marriage_status, user.living_with,
+                            user.spiritual_service_before, user.spiritual_service_place_name,
+                            user.service_option_part1, user.service_option_part2, user.service_option_part3,
+                            user.full_name,
+                            user.relatives_name1, user.relatives_name2, user.relatives_name3,
+                            user.relatives_phone1, user.relatives_phone2, user.relatives_phone3, user.registration_year
+                        ];
+
+                        fields.forEach((field, index) => {
+                            const td = document.createElement("td");
+                            td.textContent = field;
+
+                            // Create an Edit button
+                            const editButton = document.createElement("button");
+                            editButton.textContent = "አርትዕ";
+                            editButton.className = "edit-button";
+                            editButton.onclick = (e) => {
+                                e.stopPropagation(); // Prevent triggering the double click
+                                openEditField(td, field, index, user);
+                            };
+
+                            td.appendChild(editButton);
+                            td.ondblclick = () => openEditField(td, field, index, user);
+                            row.appendChild(td);
+                        });
+
+                        // Create an Assign button
+                        const assignButton = document.createElement("button");
+                        assignButton.textContent = "ይመድቡ";
+                        assignButton.onclick = () => showClassSelection(user); // Show the class selection modal
+                        const assignTd = document.createElement("td");
+                        assignTd.appendChild(assignButton);
+                        row.appendChild(assignTd); // Append the button cell to the row
+
+                        table.appendChild(row);
+                    });
+                    resultsDiv.appendChild(table);
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        }
+
+       // Function to open the edit field
+function openEditField(td, currentValue, index, user) {
+    // Create input for editing
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "edit-input";
+    input.value = currentValue;
+
+    // Create Save button
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "ይቀይሩ"; // Save in Amharic
+    saveButton.className = "save-button hold";
+
+    // On save button click
+    saveButton.onclick = () => {
+        const newValue = input.value;
+        td.textContent = newValue; // Update displayed value
+        updateUserField(user.id, index, newValue); // Update the user in the database
+        td.removeChild(input); // Remove input
+        td.removeChild(saveButton); // Remove save button
+    };
+
+    // On input blur (when focus is lost)
+    input.onblur = () => {
+        td.removeChild(input);
+        td.removeChild(saveButton); // Remove save button
+        td.textContent = currentValue; // Restore old value if not saved
+    };
+
+    // Save changes on pressing Enter
+    input.onkeydown = (event) => {
+        if (event.key === 'Enter') {
+            saveButton.click(); // Trigger save button click
+        }
+    };
+
+    // Clear the cell and add input and button
+    td.innerHTML = ''; // Clear the cell
+    td.appendChild(input); // Add input to the cell
+    td.appendChild(saveButton); // Add save button to the cell
+    input.focus(); // Focus the input
+}
+
+       // Function to update user field
+function updateUserField(userId, fieldIndex, newValue) {
+    const fields = [
+        "name", "father_name", "grandfather_name", "birth_year", "birth_month",
+        "birth_day", "address_city", "district", "house_number", "mobile",
+        "alternate_phone", "email", "baptism_name", "father_christian_name",
+        "father_service_location", "education_1_8", "education_9_10", 
+        "education_11_12", "college_name1", "college_start1", "college_end1",
+        "college_name2", "college_start2", "college_end2", "college_name3",
+        "college_start3", "college_end3", "occupation1", "occupation2",
+        "occupation3", "current_study_field", "current_study_institution",
+        "work_status", "employer_name", "marriage_status", "living_with",
+        "spiritual_service_before", "spiritual_service_place_name",
+        "service_option_part1", "service_option_part2", "service_option_part3",
+        "full_name", "relatives_name1", "relatives_name2", "relatives_name3",
+        "relatives_phone1", "relatives_phone2", "relatives_phone3", 
+        "registration_year"
+    ];
+
+    const fieldName = fields[fieldIndex];
+
+    fetch(`http://127.0.0.1:15080/update-user`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: userId, field: fieldName, value: newValue }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok: " + response.status);
+        }
+        return response.json();
+    })
+    .then(() => {
+        alert("User updated successfully!");
+        fetchData(); // Refresh data
+    })
+    .catch(error => {
+        console.error("Error updating user:", error);
+    });
+}
+
+        // Event listener for the year button
+        document.getElementById("fetch-year").addEventListener("click", () => {
+            const year = document.getElementById("year").value;
+            fetchData(year); // Fetch data with specified year
+        });
+
+        // Event listener for the name button
+        document.getElementById("fetch-name").addEventListener("click", () => {
+            const name = document.getElementById("name").value;
+            fetchData(null, name); // Fetch data with specified name
+        });
+
+        // Delete button  
+        document.getElementById("delete-button").addEventListener("click", () => {
+            const name = document.getElementById("delete-name").value;
+            const fatherName = document.getElementById("delete-father-name").value;
+
+            // Confirmation dialog
+            const confirmed = confirm(`Are you sure you want to delete the user ${name} with father's name ${fatherName}?`);
+            if (confirmed) {
+                deleteUser(name, fatherName);
+            }
+        });
+
+        // Function to delete user by name and father's name
+        function deleteUser(name, fatherName) {
+            fetch(`http://127.0.0.1:15080/delete-user`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, fatherName }), // Send name and father's name in the request body
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok: " + response.status);
+                }
+                return response.json();
+            })
+            .then(() => {
+                fetchData(); // Refresh data to reflect the changes
+            })
+            .catch(error => {
+                console.error("Error deleting user:", error);
+            });
+        }
+
+        // Assign button function
+        const classes = [
+            "ጽሕፈት_ቤት", "ትምህርት_ክፍል", "መዝሙር_ክፍል", "ኪነ_ጥበብ_ክፍል",
+            "ልማት_ክፍል", "የውስጥ_ግንኙነት_ክፍል", "በጎ_አድራጎት_ክፍል", "ዶክመንቴሽን_ክፍል",
+            "ህጻናት_ክፍል", "ምክረ_አበው_ክፍል", "ስልጠናና_መርሐ_ግብር_ክፍል", "ጥናትና_ምርምር_ክፍል",
+            "ውጪ_ግንኙነት_ክፍል" 
+        ];  // Add all 13 classes here
+
+        function showClassSelection(user) {
+            const classList = document.getElementById("class-list");
+            classList.innerHTML = ""; // Clear previous classes
+
+            classes.forEach(className => {
+                const listItem = document.createElement("li");
+                listItem.textContent = className;
+                listItem.onclick = () => assignUserToClass(user, className);
+                classList.appendChild(listItem);
+            });
+
+            document.getElementById("class-selection-modal").style.display = "block";
+        }
+
+        // Close modal
+        document.getElementById("close-modal").onclick = () => {
+            document.getElementById("class-selection-modal").style.display = "none";
+        };
+
+       // Function to assign user to selected class
+        function assignUserToClass(user, className) {
+            fetch(`http://127.0.0.1:15080/assign-to-class`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: user.name,
+                    fatherName: user.father_name,
+                    mobile: user.mobile,
+                    className: className
+                }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok: " + response.status);
+                }
+                return response.json();
+            })
+            .then(() => {
+                alert("User assigned successfully!");
+                document.getElementById("class-selection-modal").style.display = "none"; // Close modal
+                fetchData(); // Refresh data
+            })
+            .catch(error => {
+                console.error("Error assigning user:", error);
+            });
+        }
+
+        // Automatically fetch data when the page is loaded
+        fetchData();
+    </script>
+</body>
+</html>

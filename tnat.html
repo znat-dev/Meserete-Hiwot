@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    <style>
+        .button-group {
+            margin-bottom: 20px;
+            margin-left: 30px;
+        }
+        .button-group button {
+            background-color: #fff;
+            border:#0072bc;
+            color: #0072bc;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .button-group button:hover {
+            background-color: #0072bc;
+            color: #fff;
+        }
+        .sub-options {
+            display: none;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        .sub-options button {
+            margin: 10px;
+            display: flex;
+            margin-left: 100px;
+            background-color: #fff;
+            border:#0072bc;
+            color: #0072bc;
+        }
+        .sub-options button:hover {
+            background-color: #0072bc;
+            color: #fff;
+        }
+        .pdf-viewer {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            width: 100%;
+            height: 500px;
+        }
+        .top {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+                    <!-- buttons 1 -->
+                    <div class="button-group" id="button1">
+                        <button class="top" onclick="toggleOptions('options1')">&#10022;  የካልአይ የመዝሙር ፣ የወረብ እና የአብነት መጻሕፍት</button>
+                        <div class="sub-options" id="options1">
+                            <button onclick="showPDF('pdf1-1.pdf')">መጽሐፍ 1</button>
+                            <button onclick="showPDF('pdf1-2.pdf')">መጽሐፍ 2</button>
+                            <button onclick="showPDF('pdf1-3.pdf')">መጽሐፍ 3</button>
+                            <button onclick="showPDF('pdf1-4.pdf')">መጽሐፍ 4</button>
+                            <button onclick="showPDF('pdf1-5.pdf')">መጽሐፍ 5</button>
+                            <button onclick="showPDF('pdf1-6.pdf')">መጽሐፍ 6</button>
+                        </div>
+                    </div>
+
+                    <!-- buttons 2 -->
+                    <div class="button-group" id="button2">
+                        <button onclick="toggleOptions('options2')">&#10022;  የሳልሳይ የመዝሙር ፣ የወረብ እና የአብነት መጻሕፍት</button>
+                        <div class="sub-options" id="options2">
+                            <button onclick="showPDF('pdf2-1.pdf')">መጽሐፍ 1</button>
+                            <button onclick="showPDF('pdf2-2.pdf')">መጽሐፍ 2</button>
+                            <button onclick="showPDF('pdf2-3.pdf')">መጽሐፍ 3</button>
+                            <button onclick="showPDF('pdf2-4.pdf')">መጽሐፍ 4</button>
+                            <button onclick="showPDF('pdf2-5.pdf')">መጽሐፍ 5</button>
+                            <button onclick="showPDF('pdf2-6.pdf')">መጽሐፍ 6</button>
+                        </div>
+                    </div>
+
+                    <!-- buttons 3 -->
+                    <div class="button-group" id="button3">
+                        <button onclick="toggleOptions('options3')">&#10022;  የማእክላውያን የመዝሙር ፣ የወረብ እና የአብነት መጻሕፍት</button>
+                        <div class="sub-options" id="options3">
+                            <button onclick="showPDF('pdf3-1.pdf')">መጽሐፍ 1</button>
+                            <button onclick="showPDF('pdf3-2.pdf')">መጽሐፍ 2</button>
+                            <button onclick="showPDF('pdf3-3.pdf')">መጽሐፍ 3</button>
+                            <button onclick="showPDF('pdf3-4.pdf')">መጽሐፍ 4</button>
+                            <button onclick="showPDF('pdf3-5.pdf')">መጽሐፍ 5</button>
+                            <button onclick="showPDF('pdf3-6.pdf')">መጽሐፍ 6</button>
+                        </div>
+                    </div>
+
+                <!-- buttons 4 -->
+                <div class="button-group" id="button4">
+                    <button onclick="toggleOptions('options4')">&#10022;  የቋሚ መዘምራን የመዝሙር ፣ የወረብ እና የአብነት መጻሕፍት</button>
+                    <div class="sub-options" id="options4">
+                        <button onclick="showPDF('pdf4-1.pdf')">መጽሐፍ 1</button>
+                        <button onclick="showPDF('pdf4-2.pdf')">መጽሐፍ 2</button>
+                        <button onclick="showPDF('pdf4-3.pdf')">መጽሐፍ 3</button>
+                        <button onclick="showPDF('pdf4-4.pdf')">መጽሐፍ 4</button>
+                        <button onclick="showPDF('pdf4-5.pdf')">መጽሐፍ 5</button>
+                        <button onclick="showPDF('pdf4-6.pdf')">መጽሐፍ 6</button>
+                    </div>
+                </div>
+
+
+
+    <iframe id="pdfViewer" class="pdf-viewer" src="" style="display:none;"></iframe>
+
+    <script>
+        function toggleOptions(optionId) {
+            const options = document.getElementById(optionId);
+            options.style.display = options.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function showPDF(pdfUrl) {
+            const viewer = document.getElementById('pdfViewer');
+            viewer.src = pdfUrl;
+            viewer.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

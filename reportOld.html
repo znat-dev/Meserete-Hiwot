@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>የምክረ አበው ክፍል ሪፖርት</title>
+    <style>
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            border-right: 1px solid #b1acac;
+        }
+        th, td {
+            border-right: 1px solid #b1acac;
+            border-left: 1px solid #b1acac;
+            padding: 8px;
+            text-align: left;
+        }
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+        th, td {
+            border-bottom: 1px solid #b1acac;
+            border-left: 1px solid #b1acac;
+            background-color: #f4f4f4;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+            color: #0072bc; 
+            border: 1px solid #b1acac;
+        }
+        input {
+            border-color: #b1acac;
+        }
+        textarea {
+            border-color: #b1acac;
+            width: 195px;
+            height: fit-content;
+            min-height: 80px;
+        }
+        .qqq, button  {
+            color: #fff; 
+            border: none;
+            border-radius: 5px;
+            background-color: #0072bc; 
+            padding: 5px;
+        }
+        .qqq:hover {
+            color: #0072bc; 
+            border: 1px solid #0072bc; 
+            background-color: #fff;
+        }
+        .qqqq {
+            color: #0072bc; 
+        }
+    </style>
+</head>
+<body>
+    <h1 class="qqqq">የምክረ አበው ክፍል ሪፖርት ማስገቢያ ቅጽ</h1>
+    <table id="yourTable">
+        <thead>
+            <tr>
+                <th>የእቅዱ አይነት</th>
+                <th>የታቀደው መጠን</th>
+                <th>የተሰራው መጠን</th>
+                <th>ምርመራ</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <button class="qqq" id="plusRow">መስመር ጨምር</button>
+    <button class="qqq" id="saveReport">አስቀምጥ</button>
+    <button class="qqq" id="fetchReport">ሪፖርት አሳይ</button>
+
+    <script>
+        let existingReports = []; // Store existing report data as objects
+    
+        document.getElementById("plusRow").onclick = function () {
+            const tbody = document.querySelector("#yourTable tbody");
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td><textarea></textarea></td>
+                <td><textarea></textarea></td>
+                <td><textarea></textarea></td>
+                <td><textarea></textarea></td>
+                <td><button onclick="deleteRow(this)">ሰርዝ</button></td>
+            `;
+            tbody.appendChild(row);
+        };
+    
+        function deleteRow(button) {
+            button.parentNode.parentNode.remove();
+        }
+    
+        async function handleSaveReport() {
+            const userRole = await getUserRole(); // Fetch user role on button click
+            console.log("User Role:", userRole); // Log the user role for debugging
+    
+            // Check if the user has permission to save
+            if (!hasPermission(userRole, 'save')) {
+                alert("ሪፖርቱን ማስቀመጥ አይችሉም። ለተጠሪ ያመልክቱ።"); // Show alert if not allowed
+                console.error("User does not have permission to save.");
+                return; // Exit if no permission
+            }
+    
+            const rows = document.querySelectorAll("#yourTable tbody tr");
+            const data = [];
+    
+            rows.forEach((row) => {
+                const cells = row.querySelectorAll("textarea");
+                if (cells.length < 4) return; // Ensure all columns exist
+    
+                const rowData = {
+                    type: cells[0].value.trim(),
+                    planned: cells[1].value.trim(),
+                    completed: cells[2].value.trim(),
+                    remark: cells[3].value.trim()
+                };
+    
+                // Check if this row is different from existing reports
+                const isDuplicate = existingReports.some(report => 
+                    report['የእቅዱ_አይነት'] === rowData.type &&
+                    report['የታቀደው_መጠን'] === rowData.planned &&
+                    report['የተሰራው_መጠን'] === rowData.completed &&
+                    report['ምርመራ'] === rowData.remark
+                );
+    
+                // Only add new rows that are not already present
+                if (!isDuplicate && (rowData.type || rowData.planned || rowData.completed || rowData.remark)) {
+                    data.push(rowData);
+                }
+            });
+    
+            fetch("http://localhost:15080/old_report_save", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                fetchReports(); // Fetch updated reports after saving
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    
+        document.getElementById("saveReport").onclick = handleSaveReport; // Set save button functionality
+    
+        document.getElementById("fetchReport").onclick = fetchReports; // Fetch button functionality
+    
+        function fetchReports() {
+            fetch("http://localhost:15080/old_reports")
+                .then(response => response.json())
+                .then(reports => {
+                    if (!Array.isArray(reports)) {
+                        console.error("ትክክለኛ ያልሆነ መረጃ!", reports);
+                        return;
+                    }
+    
+                    const tbody = document.querySelector("#yourTable tbody");
+                    tbody.innerHTML = "";
+                    existingReports = []; // Reset existing reports
+    
+                    reports.forEach(report => {
+                        const row = document.createElement("tr");
+                        row.innerHTML =` 
+                            <td><textarea>${report['የእቅዱ_አይነት']}</textarea></td>
+                            <td><textarea>${report['የታቀደው_መጠን']}</textarea></td>
+                            <td><textarea>${report['የተሰራው_መጠን']}</textarea></td>
+                            <td><textarea>${report['ምርመራ']}</textarea></td>
+                            <td><button onclick="deleteReport(${report.id})">ሰርዝ</button></td>
+                        `;
+                        tbody.appendChild(row);
+                        existingReports.push(report); // Store the existing report object
+                    });
+                })
+                .catch(error => console.error("ሪፖርቱን ለማሳየት አልተቻለም።", error));
+        }
+    
+        async function deleteReport(id) {
+            const userRole = await getUserRole(); // Fetch user role before deleting
+            if (!hasPermission(userRole, 'delete')) {
+                alert("ሪፖርቱን መሰረዝ አይችሉም። ለተጠሪ ያመልክቱ።"); // Show alert if not allowed
+                console.error("User does not have permission to delete.");
+                return; // Exit if no permission
+            }
+    
+            fetch(`http://localhost:15080/old_reports/${id}`, { method: "DELETE" })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    fetchReports(); // Refresh the report list after deletion
+                })
+                .catch(error => console.error("ሪፖርቱን ለመሰረዝ አልተቻለም።", error));
+        }
+    
+        async function getUserRole() {
+            const token = localStorage.getItem('token');
+            if (!token) return 'normal_user'; // Default if no token
+    
+            try {
+                const response = await fetch("http://localhost:15080/user/role", {
+                    method: "GET",
+                    headers: { "Authorization": token }
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.role || 'normal_user';
+                } else {
+                    return 'normal_user';
+                }
+            } catch (error) {
+                console.error("Error fetching user role:", error);
+                return 'normal_user';
+            }
+        }
+    
+        function hasPermission(userRole, action) {
+            const permissions = {
+                save: ['admin', 'super_admin', 'sub_admin'],
+                delete: ['admin', 'super_admin']
+            };
+            return permissions[action] && permissions[action].includes(userRole);
+        }
+    </script>
+</body>
+</html>

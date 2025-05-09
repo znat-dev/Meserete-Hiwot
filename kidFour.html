@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    <style>
+        body {
+            padding: 20px;
+            margin: 0px;
+          display: flex;
+          flex-direction: column;
+          color: #0072bc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+       
+        .form-container {
+            margin-bottom: 20px;
+            flex-shrink: 1;
+            min-width: fit-content;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        label {
+            align-items: center;
+            padding: 0px;
+        }
+        input {
+            margin: 3px;
+            
+        }
+        
+        .kname {
+            flex-shrink: 1;
+           min-width: 50%;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           gap: 30px;
+          
+           
+        }
+        .kname1 {
+           flex-shrink: 1;
+           min-width: 50%;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           gap: 30px;
+        }
+         .kphoneTwo {
+            margin-left: 0px;
+         }
+         .bapt {
+            margin-left: 0px;
+         }
+        .kname2 {
+           flex-shrink: 1;
+           min-width: 50%;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           gap: 30px;
+        }
+        .kage {
+            margin-left: 0px;
+            margin-right: 0px;
+          
+        }
+        .kphone {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+      
+        .ksm {
+            margin-left: 0px;
+        }
+
+        .kfather {
+            margin-left: 0px;
+        }
+        .kgrandfather {
+            margin-left: 0px;
+        }
+        .parent {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        .parentTwo {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        .title-course {
+            text-align: center;
+            font-size: 30px;
+            color: #0072bc;
+        }
+        .kbtn {
+           background-color: none;
+           flex-shrink: 1;
+           min-width: 50%;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+        }
+        .kbtn button {
+            width: 200px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: #0072bc;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 20px;
+        }
+        .kbtn button:hover {
+            background-color: #fff;
+            color: #0072bc;
+            border: 2px solid #0072bc;
+        }
+        #confirmationModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #confirmDelete {
+            background-color: #0072bc;
+            margin-left: 30px;
+            border: none;
+            color: #fff;
+            border-radius: 3px;
+            padding: 5px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        #confirmDelete:hover {
+            border: 2px solid #0072bc;
+            background-color: #fff;
+            color: #0072bc;
+        }
+        #cancelDelete {
+            background-color: #0072bc;
+            margin-left: 30px;
+            border: none;
+            color: #fff;
+            border-radius: 3px;
+            padding: 5px;
+        }
+        #cancelDelete:hover {
+            background-color: #fff;
+            color: #0072bc;
+            border: 2px solid #0072bc;
+        }
+        .stop {
+            background-color: #0072bc;
+            border: none;
+            color: #fff;
+            border-radius: 3px;
+            padding: 5px;
+        }
+        .stop:hover {
+            border: none;
+            background-color: #fff;
+            color: #0072bc;
+            border: 2px solid #0072bc;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="title-course">የህጻናት ራብአይ ኮርስ የምዝገባ ቅጽ</h2>
+    <div class="form-container">
+       
+        <form id="registrationFormKidOne" action="http://localhost:15080/submit_kid_four" method="post">
+        <div class="kname">
+                <div class="ksm">
+                    <label for="name">ስም</label><br>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="kfather">
+                    <label for="fathername">የአባት ስም</label><br>
+                    <input type="text" id="fathername" required>
+                 </div>
+                 <div class="kgrandfather">
+                    <label for="grandfathername">የአያት ስም</label><br>
+                    <input type="text" id="grandfathername" required>
+                </div>
+                
+            </div>
+
+            <div class="kname2">
+
+                <div class="bapt">
+                    <label for="baptismname">የክርስትና ስም</label><br>
+                    <input type="text" id="baptismname" required>
+                </div>
+                <div class="parent">
+                    <label for="parent">1ኛ የወላጅ (የአሳዳጊ) ስም</label><br>
+                    <input type="text" id="parent" required><br>
+                </div>
+                <div class="parentTwo">
+                    <label for="parentTwo">2ኛ የወላጅ (የአሳዳጊ) ስም</label><br>
+                    <input type="text" id="parentTwo"><br>
+                </div>
+
+            </div>
+
+
+            <div class="kname1">
+                
+                <div class="kage">
+                    <label for="age">እድሜ</label><br>
+                    <input type="number" id="age" required>
+                </div>
+                <div class="kphone">
+                    <label for="phonenumber">1ኛ ስልክ</label><br>
+                    <input type="number" id="phonenumber" required>
+                </div>
+                <div class="kphoneTwo">
+                    <label for="phonenumberTwo">2ኛ ስልክ</label><br>
+                    <input type="number" id="phonenumberTwo">
+                </div>
+            </div>
+
+
+            
+        </div>
+
+        <div class="kbtn">
+            <button type="submit">መዝግብ</button>
+        </div>
+
+        </form>
+    </div>
+
+    <h2 class="title-course">የምዝገባ መረጃ</h2>
+    <table id="confirmationTableOne">
+        <thead>
+            <tr>
+                <th>ስም</th>
+                <th>የአባት ስም</th>
+                <th>የአያት ስም</th>
+                <th>የክርስትና ስም</th>
+                <th>1ኛ የወላጅ (የአሳዳጊ) ስም</th>
+                <th>2ኛ የወላጅ (የአሳዳጊ) ስም</th>
+                <th>እድሜ</th>
+                <th>1ኛ ስልክ</th>
+                <th>2ኛ ስልክ</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Confirmation entries will go here -->
+        </tbody>
+    </table>
+
+<!-- Custom Confirmation Modal -->
+<div id="confirmationModal" style="display: none;">
+    <div style="background-color: white; padding: 20px; border: 1px solid #ccc; border-radius: 5px; width: 300px; margin: 100px auto; top: auto; position: fixed;">
+        <h3>እርግጠኛ ኖት?</h3>
+        <p>ይህንን መስመር መሰረዝ ይፈልጋሉ?</p>
+        <button id="confirmDelete">አዎ</button>
+        <button id="cancelDelete">አልፈልግም</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        await fetchRegistrations();
+    });
+
+    document.getElementById('registrationFormKidOne').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        const userRole = await getUserRole(); // Fetch user role on submit
+        console.log("User Role:", userRole); // Log the user role for debugging
+
+        // Check if the user has permission to submit
+        if (!hasPermission(userRole, 'submit')) {
+            alert("ምዝገባውን መመዝገብ አይችሉም። ለተጠሪዎ ሪፖርት ያድርጉ።"); // Show alert if not allowed
+            console.error("User does not have permission to submit.");
+            return; // Exit if no permission
+        }
+
+        // Retrieve values from the form
+        const registrationData = {
+            name: document.getElementById('name').value,
+            fathername: document.getElementById('fathername').value,
+            grandfathername: document.getElementById('grandfathername').value,
+            baptismname: document.getElementById('baptismname').value,
+            parent: document.getElementById('parent').value,
+            parentTwo: document.getElementById('parentTwo').value,
+            age: document.getElementById('age').value,
+            phonenumber: document.getElementById('phonenumber').value,
+            phonenumberTwo: document.getElementById('phonenumberTwo').value,
+        };
+
+        // Submit form data to the server
+        await fetch('http://localhost:15080/submit_kid_four', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(registrationData),
+        });
+
+        // Optionally, clear the form fields
+        document.getElementById('registrationFormKidOne').reset();
+        await fetchRegistrations();
+    });
+
+    async function fetchRegistrations() {
+        const response = await fetch('http://localhost:15080/kid_four_course');
+        const registrations = await response.json();
+        const tableBody = document.querySelector('#confirmationTableOne tbody');
+        tableBody.innerHTML = ''; // Clear existing entries
+
+        registrations.forEach(reg => {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = 
+                `<td>${reg.name}</td>
+                 <td>${reg.fathername}</td>
+                 <td>${reg.grandfathername}</td>
+                 <td>${reg.baptismname}</td>
+                 <td>${reg.parent}</td>
+                 <td>${reg.parentTwo}</td>
+                 <td>${reg.age}</td>
+                 <td>${reg.phonenumber}</td>
+                 <td>${reg.phonenumberTwo}</td>
+                 <td><button class="stop" onclick="deleteRegistration(${reg.id})">ሰርዝ</button></td>`;
+            tableBody.appendChild(newRow);
+        });
+    }
+
+    let currentIdToDelete = null;
+
+    async function deleteRegistration(id) {
+        const userRole = await getUserRole(); // Fetch user role before deletion
+        if (!hasPermission(userRole, 'delete')) {
+            alert("ምዝገባውን መሰረዝ አይችሉም። ለተጠሪዎ ሪፖርት ያድርጉ።"); // Show alert if not allowed
+            console.error("User does not have permission to delete.");
+            return; // Exit if no permission
+        }
+
+        currentIdToDelete = id; // Store the ID to delete
+        // Show the modal
+        document.getElementById('confirmationModal').style.display = 'flex';
+    }
+
+    // Confirm deletion
+    document.getElementById('confirmDelete').addEventListener('click', async function() {
+        await fetch(`http://localhost:15080/kid_four_course/${currentIdToDelete}`, {
+            method: 'DELETE',
+        });
+        await fetchRegistrations();
+        document.getElementById('confirmationModal').style.display = 'none'; // Hide the modal
+    });
+
+    // Cancel deletion
+    document.getElementById('cancelDelete').addEventListener('click', function() {
+        document.getElementById('confirmationModal').style.display = 'none'; // Hide the modal
+    });
+
+    async function getUserRole() {
+        const token = localStorage.getItem('token');
+        if (!token) return 'normal_user'; // Default if no token
+
+        try {
+            const response = await fetch("http://localhost:15080/user/role", {
+                method: "GET",
+                headers: { "Authorization": token }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.role || 'normal_user';
+            } else {
+                return 'normal_user';
+            }
+        } catch (error) {
+            console.error("Error fetching user role:", error);
+            return 'normal_user';
+        }
+    }
+
+    function hasPermission(userRole, action) {
+        const permissions = {
+            submit: ['admin', 'super_admin', 'sub_admin'],
+            delete: ['admin', 'super_admin']
+        };
+        return permissions[action] && permissions[action].includes(userRole);
+    }
+</script>
+
+</body>
+</html>

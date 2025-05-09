@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+        <link rel="shortcut icon" type="x-icon" href="WhiteImage.jpg">
+        <style>
+      
+            .all {
+                display: flex;
+                
+            }
+            .other {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                padding-left: 10px;
+                margin-left: 275px; /*delete here to change the sticky property of the menu bar*/
+            }
+            .title {
+                height: 120px;
+                background-image: url('MHSS.png'); /* Set your image path here */
+                background-size: contain; /* Scale the image to cover the entire section */
+                background-repeat: no-repeat;
+                background-size: 15%;
+                background-position: center; /* Center the image */
+                color: #0072bc; /* Text color for better contrast */
+                text-align: center; /* Center the text */
+                position: relative; /* Make it relative for absolute positioning of divs */
+                animation: bounce 16s ease-in-out infinite;
+            }
+
+            @keyframes bounce {
+        0% {
+            background-position: -100% center; /* Start off-screen on the left */
+        }
+        40% {
+            background-position: 50% center; /* Move to the center */
+        }
+        100% {
+            background-position: 200% center; /* Reset to the left */
+        }
+    }
+            .title h1 {
+                margin-top: -60px;
+            }
+            .bar {
+                display: flex;
+                background:  #0072bc;  
+                height: 30px;
+                text-align:left;
+                padding: 15px;
+                align-items: center;
+            }
+            .content {
+                display: flex;
+                margin-top: 5px; 
+                flex-grow: 1;
+                padding-bottom: 10px;
+            }
+            .center {
+                background-color: #E6E6FA;
+                width: 100%;
+                margin-right: 0px;
+                height: 100vh;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                flex: 1;
+            }
+            iframe {
+              width: 100%;
+              height: 100vh;
+              border: none;
+              margin: 0px;
+              padding: 0px;
+              overflow: hidden;
+            }
+        
+            h1, h2 {
+                text-align: center;
+            }
+            h2 {
+                font-weight: bold;
+                color: #0072bc;
+            }
+
+            .hidden-letter {
+                opacity: 0;
+                transition: opacity 0.7s ease-in-out;
+            }
+
+            .fade-out {
+                opacity: 0 !important;
+                transition: opacity 1s ease-in-out;
+            }
+            .bar a {
+                border-radius: 10px;
+                color: #fff;
+                margin-left: 40px;
+                text-align: center;
+                padding: 10px;
+                width: 50px;
+                height: max-content;
+                text-decoration: none;
+                font-size: 12px;
+                font-weight: bold;
+                box-shadow: 0 0 5px;
+            }
+            .bar a:hover {
+                border-radius: 10px;
+                margin-left: 40px;
+                text-align: center;
+                padding: 10px;
+                width: 50px;
+                height: max-content;
+                text-decoration: none;
+                font-size: 12px;
+                font-weight: bold;
+                color: #0072bc;
+                background-color: #ffc527;
+                cursor: pointer;
+          }
+            h3 {
+                color: white;
+                font-size: 30px;
+                font-weight: bolder;
+                margin-bottom: 0px;
+                margin-left: 20px;
+            }
+          .menu-container {
+                background-color: #0072bc;
+                width: 250px;
+                color: white;
+                height: 100vh;
+                padding: 10px;
+                padding-top: 30px;
+                padding-left: 20px;
+                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), /* Shadow at the bottom and sides */
+                            0 -4px 0 rgba(255, 255, 255, 0); /* Remove shadow at the top */
+                margin-top: 0px;
+                display: flex;
+                flex-direction: column;
+                
+                
+          }
+          
+          .menu-container button {
+                font-size: 12px;
+                padding: 10px;
+                padding-top: 0px;
+                margin-right: 20px;
+                margin-left: 10px;
+                width: 190px;
+                background: none;
+                border: none;
+                text-align: start;
+                color: white;
+                border-radius: 15px;
+                
+          }
+          
+          .menu-container button:hover {
+                background-color: #ffc527;
+                border-radius: 15px;
+                border: none;
+                color: #0072bc;
+                text-align: start;
+                cursor: pointer;
+          }
+          .menu-container button:not(:last-child) {
+                border-bottom: 0.5px solid #E6E6FA;
+                border-bottom-right-radius: 10px;
+                border-bottom-left-radius: 10px;
+          }
+         
+            .sub-options button:not(:last-child) {
+                border-bottom: 0.5px solid #E6E6FA;
+                border-bottom-right-radius: 10px;
+                border-bottom-left-radius: 10px;
+                width: fit-content;
+            }
+            
+            .sub-options a::before {
+                content: '*'; /* Add the asterisk */
+                color: white; /* Set the color of the asterisk */
+                margin-right: 10px; /* Space between the asterisk and the text */
+                font-size: 1em; /* Adjust the size of the asterisk if needed */
+          }
+          .sub-options button::before {
+                content: '*'; /* Add the asterisk */
+                color: white; /* Set the color of the asterisk */
+                margin-right: 10px; /* Space between the asterisk and the text */
+                font-size: 1em; /* Adjust the size of the asterisk if needed */
+          }
+          .menu-container .hidden {
+            display: none;
+          }
+          
+          .sub-options {
+            margin-left: 10px;
+            font-size: 12px;
+            
+          }
+          .sub-options div:not(:last-child) {
+                border-bottom: none;
+            }
+          
+          .sub-sub-options {
+            margin-left: 10px;
+            font-size: 12px;
+            
+          }
+          .sub-options button {
+            margin-left: 20px;
+          }
+          a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin: 5px 35px;
+            font-size: 12px;
+           
+          }
+          
+          .sub-sub-options a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #0072bc;
+            width: fit-content;
+            border-radius: 15px;
+            cursor: pointer;
+            text-align: center;
+          }
+          .sub-sub-options a:hover {
+            text-decoration: none;
+            color: #0072bc;
+            background-color: #ffc527;
+            padding: 5px;
+            width: fit-content;
+            border-radius: 15px;
+            cursor: pointer;
+            text-align: center;
+          }
+       
+        @media (max-width: 768px) {
+        .menu-container {
+            width: 100%;
+            height: auto; /* Adjust height for smaller screens */
+        }
+        .content {
+            flex-direction: column; /* Stack content vertically */
+        }
+      }
+
+      .profile-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ccc;
+            
+        }
+
+        .upload-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 0 0 50px 50px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .profile-container:hover .upload-overlay {
+            opacity: 1;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+    
+        .who {
+            background-color: #0072bc;
+            top: 0;
+            left: 0;
+            border: none;
+            height: 100vh;
+            position: fixed; /*delete here to change the sticky property of the menu bar*/
+            overflow-x: hidden; 
+            overflow-y: auto;
+             
+        }
+
+        .logout-button {
+            opacity: 1;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left:15px;
+            padding-right: 30px;
+            display: inline-flex;
+            background-color: #0072bc;
+            color: white; /* Button text color */
+            text-decoration: none;
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s;
+            width: 30px;
+            margin-left: 880px;
+           margin-top: 20px ;
+           font-size: 15px;
+           opacity: 0.9;
+            
+        }
+
+        .logout-button:hover {
+            background-color: #ffc527;
+            color: #0072bc;
+        }
+
+        </style>
+
+
+    </head>
+    <body>
+        
+        <div class="all">
+
+          <div class="who">
+
+          <div class="profile-container">
+            <img id="profile" class="profile-pic" src="uploads\default.jpg" alt="Profile Picture">
+          </div>
+
+           
+            <div class="menu-container">
+          
+                <!-- Main Menu -->
+                
+                  <!-- Option 1 -->
+                  
+                  <div>
+                   <span class="icon">&#10022;</span> <button class="main-button" data-id="main-1">ጽሕፈት ቤት</button>
+                    <div class="sub-options hidden" id="main-1">
+                      <button class="sub-button" data-id="sub-1-1">&#10022; የአባላት ዝርዝር</button>
+                      <div class="sub-sub-options hidden" id="sub-1-1">
+                        <a href="#" onclick="loadPage('fetch_in.html'); return false;">&#10022; አጠቃላይ አባላት</a>
+                        <a href="#" onclick="loadPage('fetch_main.html'); return false;">&#10022; የጽሕፈት ቤት አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-1-2">&#10022; የተማሪዎች ዝርዝር</button>
+                      <div class="sub-sub-options hidden" id="sub-1-2">
+                        <a href="#" onclick="loadPage('fetchKidCourse.html'); return false;">&#10022; የህጻናት ክፍል</a>
+                        <a href="#" onclick="loadPage('fetchEducationCourse.html'); return false;">&#10022; የትምህርት ክፍል</a>
+                        <a href="#" onclick="loadPage('fetchMusicCourse.html'); return false;">&#10022; የመዝሙር ክፍል</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-1-3">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-1-3">
+                        <a href="#" onclick="loadPage('directorPlan.html'); return false;">&#10022; የጽሕፈት ቤት አመታዊ እቅድ</a>
+                        <a href="#" onclick="loadPage('fetchPlan.html'); return false;">&#10022; የሰ/ት/ቤቱ ክፍሎች አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-1-4">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-1-4">
+                        <a href="#" onclick="loadPage('reportMain.html'); return false;">&#10022; የጽሕፈት ቤት ሪፖርት </a>
+                        <a href="#" onclick="loadPage('fetchReport.html'); return false;">&#10022; የሰ/ት/ቤቱ ክፍሎች ሪፖርት </a>
+                      </div>
+                      <button class="sub-button" data-id="sub-1-5">&#10022; የስራ ተዋረድና እድሳት</button>
+                      <div class="sub-sub-options hidden" id="sub-1-5">
+                        <a href="#" onclick="loadPage('role.html'); return false;">&#10022; የአባላት የስራ ተዋረድ</a>
+                        <a href="#" onclick="loadPage('editForm.html'); return false;">&#10022; እድሳት</a>
+                      </div>
+                    </div>
+                  </div>
+            
+                  <!-- Option 2 -->
+                  
+                  <div>
+                    <span class="icon">&#10022;</span>  <button class="main-button" data-id="main-2">ትምህርት ክፍል</button>
+                    <div class="sub-options hidden" id="main-2">
+                      <button class="sub-button" data-id="sub-2-1">&#10022; መመዝገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-2-1">
+                        <a href="#" onclick="loadPage('kedamaycourse.html'); return false;">&#10022; ቅዳማይ</a>
+                        <a href="#" onclick="loadPage('kalaycourse.html'); return false;">&#10022; ካልአይ</a>
+                        <a href="#" onclick="loadPage('salsaycourse.html'); return false;">&#10022; ሳልሳይ</a>
+                        <a href="#" onclick="loadPage('rabaycourse.html'); return false;">&#10022; ራብአይ</a>
+                        <a href="#" onclick="loadPage('hamsaycourse.html'); return false;">&#10022; ሃምሳይ</a>
+                        <a href="#" onclick="loadPage('sadsaycourse.html'); return false;">&#10022; ሳድሳይ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-2-2">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-2-2">
+                        <a href="#option-2-2-1">&#10022; Sub-Sub-Option 2.2.1</a>
+                        <a href="#option-2-2-2">&#10022; Sub-Sub-Option 2.2.2</a>
+                        <a href="#option-2-2-3">&#10022; Sub-Sub-Option 2.2.3</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-2-3">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-2-3">
+                        <a href="#" onclick="loadPage('fetch_edu.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-2-4">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-2-4">
+                        <a href="#" onclick="loadPage('educationPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-2-5">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-2-5">
+                        <a href="#" onclick="loadPage('reportEducation.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+                  </div>
+            
+                  <!-- option 3 -->
+            
+                  <div>
+                    <span class="icon">&#10022;</span> <button class="main-button" data-id="main-3"> መዝሙር ክፍል</button>
+                    <div class="sub-options hidden" id="main-3">
+                      <button class="sub-button" data-id="sub-3-1">&#10022; መመዝገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-3-1">
+                        <a href="#" onclick="loadPage('kalayMusicCourse.html'); return false;">&#10022; ካልአይ</a>
+                        <a href="#" onclick="loadPage('salsayMusicCourse.html'); return false;">&#10022; ሳልሳይ</a>
+                        <a href="#" onclick="loadPage('maekelawyanMusicCourse.html'); return false;">&#10022; ማእከላውያን</a>
+                        <a href="#" onclick="loadPage('kuamiMusicCourse.html'); return false;">&#10022; ቋሚ መዘምራን</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-3-2">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-3-2">
+                        <a href="#option-3-2-1">&#10022; Sub-Sub-Option 3.2.1</a>
+                        <a href="#option-3-2-2">&#10022; Sub-Sub-Option 3.2.2</a>
+                        <a href="#option-3-2-3">&#10022; Sub-Sub-Option 3.2.3</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-3-3">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-3-3">
+                        <a href="#" onclick="loadPage('fetch_music.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-3-4">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-3-4">
+                        <a href="#" onclick="loadPage('musicPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-3-5">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-3-5">
+                        <a href="#" onclick="loadPage('reportMusic.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+                  </div>
+            
+            
+                  <!-- option 4 -->
+
+                  <div>
+                    <span class="icon">&#10022;</span><button class="main-button" data-id="main-4">ኪነ ጥበብ ክፍል</button>
+                    <div class="sub-options hidden" id="main-4">
+                      <button class="sub-button" data-id="sub-4-1">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-4-1">
+                        <a href="#option-4-1-1">&#10022; ቅዳማይ</a>
+                        <a href="#option-4-1-2">&#10022; ካልአይ</a>
+                        <a href="#option-4-1-3">&#10022; ሳልሳይ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-4-2">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-4-2">
+                        <a href="#" onclick="loadPage('fetch_art.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-4-3">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-4-3">
+                        <a href="#" onclick="loadPage('artPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-4-4">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-4-4">
+                        <a href="#" onclick="loadPage('reportArt.html'); return false;">&#10022;የክፍል ሪፖርት </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- option 5 -->
+
+                  <div>
+                    <span class="icon">&#10022;</span><button class="main-button" data-id="main-5">ልማት ክፍል</button>
+                    <div class="sub-options hidden" id="main-5">
+                      <button class="sub-button" data-id="sub-5-1">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-5-1">
+                        <a href="#option-5-1-1">&#10022; ቅዳማይ</a>
+                        <a href="#option-5-1-2">&#10022; ካልአይ</a>
+                        <a href="#option-5-1-3">&#10022; ሳልሳይ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-5-2">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-5-2">
+                        <a href="#" onclick="loadPage('fetch_dev.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-5-3">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-5-3">
+                        <a href="#" onclick="loadPage('developmentPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-5-4">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-5-4">
+                        <a href="#" onclick="loadPage('reportDevelopment.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- option 6 -->
+
+                  <div>
+                    <span class="icon">&#10022;</span><button class="main-button" data-id="main-6">የውስጥ ግንኙነት ክፍል</button>
+                    <div class="sub-options hidden" id="main-6">
+                      <button class="sub-button" data-id="sub-6-1">&#10022; መመዝገቢያ እና እድሳት</button>
+                      <div class="sub-sub-options hidden" id="sub-6-1">
+                        <a href="#" onclick="loadPage('formkalay.html'); return false;">&#10022; አዲስ ምዝገባ</a>
+                        <a href="#" onclick="loadPage('editForm.html'); return false;">&#10022; እድሳት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-6-2">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-6-2">
+                        <a href="#option-6-2-1">&#10022; Sub-Sub-Option 6.2.1</a>
+                        <a href="#option-6-2-2">&#10022; Sub-Sub-Option 6.2.2</a>
+                        <a href="#option-6-2-3">&#10022; Sub-Sub-Option 6.2.3</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-6-3">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-6-3">
+                        <a href="#" onclick="loadPage('fetch_in.html'); return false;">&#10022; አጠቃላይ አባላት</a>
+                        <a href="#" onclick="loadPage('fetch_my.html'); return false;">&#10022; የክፍሉ አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-6-4">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-6-4">
+                        <a href="#" onclick="loadPage('communicationPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-6-5">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-6-5">
+                        <a href="#" onclick="loadPage('reportCommunication.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+                  </div>
+            
+
+                  <!-- option 7 -->
+
+                  <div>
+                    <span class="icon">&#10022;</span><button class="main-button" data-id="main-7">በጎ አድራጎት ክፍል</button>
+                    <div class="sub-options hidden" id="main-7">
+                      <button class="sub-button" data-id="sub-7-1">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-7-1">
+                        <a href="#option-7-1-1">&#10022; ቅዳማይ</a>
+                        <a href="#option-7-1-2">&#10022; ካልአይ</a>
+                        <a href="#option-7-1-3">&#10022; ሳልሳይ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-7-2">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-7-2">
+                        <a href="#" onclick="loadPage('fetch_aid.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-7-3">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-7-3">
+                        <a href="#" onclick="loadPage('aidPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-7-4">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-7-4">
+                        <a href="#" onclick="loadPage('reportAid.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- option 8 -->
+
+                  <div>
+                    <span class="icon">&#10022;</span><button class="main-button" data-id="main-8">ዶክመንቴሽን ክፍል</button>
+                    <div class="sub-options hidden" id="main-8">
+                      <button class="sub-button" data-id="sub-8-1">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-8-1">
+                        <a href="#option-8-1-1">&#10022; ቅዳማይ</a>
+                        <a href="#option-8-1-2">&#10022; ካልአይ</a>
+                        <a href="#option-8-1-3">&#10022; ሳልሳይ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-8-2">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-8-2">
+                        <a href="#" onclick="loadPage('fetch_doc.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-8-3">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-8-3">
+                        <a href="#" onclick="loadPage('documentationPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-8-4">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-8-4">
+                        <a hhref="#" onclick="loadPage('reportDocumentation.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- option 9 -->
+
+                  <div>
+                    <span class="icon">&#10022;</span> <button class="main-button" data-id="main-9">ህጻናት ክፍል</button>
+                    <div class="sub-options hidden" id="main-9">
+                      <button class="sub-button" data-id="sub-9-1">&#10022; መመዝገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-9-1">
+                        <a hhref="#" onclick="loadPage('kidOne.html'); return false;">&#10022; ቅዳማይ</a>
+                        <a hhref="#" onclick="loadPage('kidTwo.html'); return false;">&#10022; ካልአይ</a>
+                        <a hhref="#" onclick="loadPage('kidThree.html'); return false;">&#10022; ሳልሳይ</a>
+                        <a hhref="#" onclick="loadPage('kidFour.html'); return false;">&#10022; ራብአይ</a>
+                        <a hhref="#" onclick="loadPage('kidFive.html'); return false;">&#10022; ሃምሳይ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-9-2">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-9-2">
+                        <a href="#option-9-2-1">&#10022; Sub-Sub-Option 9.2.1</a>
+                        <a href="#option-9-2-2">&#10022; Sub-Sub-Option 9.2.2</a>
+                        <a href="#option-9-2-3">&#10022; Sub-Sub-Option 9.2.3</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-9-3">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-9-3">
+                        <a href="#" onclick="loadPage('fetch_kid.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-9-4">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-9-4">
+                        <a href="#" onclick="loadPage('kidPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-9-5">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-9-5">
+                        <a href="#" onclick="loadPage('reportKid.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+                  </div>
+            
+
+                  <!-- option 10 -->
+
+                  <div>
+                    <span class="icon">&#10022;</span> <button class="main-button" data-id="main-10">ምክረ አበው ክፍል</button>
+                    <div class="sub-options hidden" id="main-10">
+                      <button class="sub-button" data-id="sub-10-1">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-10-1">
+                        <a href="#option-10-1-1">&#10022; ቅዳማይ</a>
+                        <a href="#option-10-1-2">&#10022; ካልአይ</a>
+                        <a href="#option-10-1-3">&#10022; ሳልሳይ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-10-2">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-10-2">
+                        <a href="#" onclick="loadPage('fetch_old.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-10-3">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-10-3">
+                        <a href="#" onclick="loadPage('oldPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-10-4">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-10-4">
+                        <a href="#" onclick="loadPage('reportOld.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- option 11 -->
+
+                  <div>
+                    <span class="icon">&#10022;</span> <button class="main-button" data-id="main-11">ስልጠናና መርሀ ግብር ክፍል</button>
+                    <div class="sub-options hidden" id="main-11">
+                      <button class="sub-button" data-id="sub-11-1">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-11-1">
+                        <a href="#option-11-1-1">&#10022; ቅዳማይ</a>
+                        <a href="#option-11-1-2">&#10022; ካልአይ</a>
+                        <a href="#option-11-1-3">&#10022; ሳልሳይ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-11-2">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-11-2">
+                        <a href="#" onclick="loadPage('fetch_train.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-11-3">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-11-3">
+                        <a href="#" onclick="loadPage('trainPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-11-4">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-11-4">
+                        <a href="#" onclick="loadPage('reportTrain.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+                    </div>
+
+                  <!-- option 12 -->
+
+                  <div>
+                    <span class="icon">&#10022;</span> <button class="main-button" data-id="main-12">ጥናትና ምርምር ክፍል</button>
+                    <div class="sub-options hidden" id="main-12">
+                      <button class="sub-button" data-id="sub-12-1">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-12-1">
+                        <a href="#option-12-1-1">&#10022; ቅዳማይ</a>
+                        <a href="#option-12-1-2">&#10022; ካልአይ</a>
+                        <a href="#option-12-1-3">&#10022; ሳልሳይ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-12-2">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-12-2">
+                        <a href="#" onclick="loadPage('fetch_research.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-12-3">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-12-3">
+                        <a href="#" onclick="loadPage('researchPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-12-4">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-12-4">
+                        <a href="#" onclick="loadPage('reportResearch.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+                    </div>
+
+                  <!-- option 13 -->
+                          
+                  <div>
+                    <span class="icon">&#10022;</span> <button class="main-button" data-id="main-13">ውጪ ግንኙነት ክፍል</button>
+                    <div class="sub-options hidden" id="main-13">
+                      <button class="sub-button" data-id="sub-13-1">&#10022; ንኡስ ክፍል</button>
+                      <div class="sub-sub-options hidden" id="sub-13-1">
+                        <a href="#option-13-1-1">&#10022; ቅዳማይ</a>
+                        <a href="#option-13-1-2">&#10022; ካልአይ</a>
+                        <a href="#option-13-1-3">&#10022; ሳልሳይ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-13-2">&#10022; የክፍል አባላት</button>
+                      <div class="sub-sub-options hidden" id="sub-13-2">
+                        <a hhref="#" onclick="loadPage('fetch_out.html'); return false;">&#10022; አባላት</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-13-3">&#10022; እቅድ ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-13-3">
+                        <a href="#" onclick="loadPage('outPlan.html'); return false;">&#10022; አመታዊ እቅድ</a>
+                      </div>
+                      <button class="sub-button" data-id="sub-13-4">&#10022; ሪፖርት ማስገቢያ</button>
+                      <div class="sub-sub-options hidden" id="sub-13-4">
+                        <a href="#" onclick="loadPage('reportOut.html'); return false;">&#10022; የክፍል ሪፖርት</a>
+                      </div>
+                    </div>
+            
+                  <!-- Add more main options here -->
+                </div>
+              
+              
+           
+            </div>
+          </div>
+
+            <div class="other">
+
+              <div class="title">
+                <a href="homepage.html" class="logout-button" id="toggle-button">ይውጡ</a>
+                <h1>መሰረተ ህይወት ሰ/ት/ቤት</h1>
+                  <h2 id="animatedText"></h2>
+                  
+              </div>
+              
+              <div class="bar">
+                  <a href="#" onclick="loadPage('plan.html'); return false;">የወሩ እቅድ</a>
+                  <a href="#" onclick="loadPage('course.html'); return false;">ኮርስ</a>
+                  <a href="#" onclick="loadPage('tnat.html'); return false;">መዝሙር ጥናት</a>
+                  <a href="#" onclick="loadPage('abnet.html'); return false;">አብነት </a>
+                  <a href="#" onclick="loadPage('snksar.html'); return false;">የእለቱ ስንክሳር</a>
+                  <a href="#" onclick="loadPage('leyu.html'); return false;">ልዩ ልዩ</a>
+              </div>
+
+              <div class="content">
+                  <div class="center" id="contentArea">
+                    <iframe id="contentFrame" src="container.html" style="width:100%; height: 100vh; border:none;" scrolling="no" ></iframe>
+                  </div>
+
+                
+              </div>
+            </div>
+        </div>
+      
+        <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.js"></script>
+<script>
+ // Function to load pages into the iframe
+function loadPage(page) {
+    const frame = document.getElementById('contentFrame');
+    frame.src = `container.html?page=${page}`;  // Pass the target page as a query parameter
+}
+
+// Function to resize the iframe based on its content
+function resizeIframe() {
+    const iframe = document.getElementById('contentFrame');
+    iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+}
+
+// Resize the iframe when it loads
+document.getElementById('contentFrame').onload = resizeIframe;
+
+// Optional: Resize the iframe when the window is resized
+window.onresize = resizeIframe;
+
+// Fetch user role from the server
+async function getUserRole(token) {
+    if (!token) return 'normal_user'; // Default if no token
+
+    try {
+        const response = await fetch("http://localhost:15080/user/role", {
+            method: "GET",
+            headers: { "Authorization": token }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            return data.role || 'normal_user';
+        } else {
+            return 'normal_user'; // Fallback role
+        }
+    } catch (error) {
+        return 'normal_user'; // Fallback role
+    }
+}
+
+// Handle dynamic menu rendering based on user role
+document.addEventListener("DOMContentLoaded", async () => {
+    const token = localStorage.getItem('token');
+    let decodedToken;
+
+    // Check if the token exists and is valid
+    if (token) {
+        try {
+            decodedToken = jwt_decode(token); // Decode the JWT token
+            
+            // Fetch user role after confirming token validity
+            const userRole = await getUserRole(token);
+            // Load menu options based on role
+            loadMenuOptions(token);
+        } catch (error) {
+            return; // Exit if token decoding fails
+        }
+    } else {
+        return; // Exit if no token is found
+    }
+});
+
+// Function to load menu options
+function loadMenuOptions(token) {
+    fetch("http://localhost:15080/member", {
+        method: "GET",
+        headers: { "Authorization": token }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch member data');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const menuDiv = document.querySelector('.menu-container');
+        menuDiv.innerHTML = ''; // Clear existing menu items first
+
+        if (data.menuOptions) {
+            data.menuOptions.forEach(option => {
+                // Create main button for the option
+                const button = document.createElement('button');
+                button.classList.add('main-button');
+                button.setAttribute('data-id', `main-${option.id}`);
+                button.innerHTML = `&#10022; ${option.name}`; // Add a symbol before the name
+
+                // Append the button to the menu
+                menuDiv.appendChild(button);
+
+                // Check if there are sub-options
+                if (option.subOptions && option.subOptions.length > 0) {
+                    const subDiv = document.createElement('div');
+                    subDiv.classList.add('sub-options', 'hidden');
+                    subDiv.setAttribute('id', `main-${option.id}`);
+
+                    option.subOptions.forEach(subOption => {
+                        const subButton = document.createElement('button');
+                        subButton.classList.add('sub-button');
+                        subButton.setAttribute('data-id', `sub-${subOption.id}`);
+                        subButton.innerText = subOption.name;
+
+                        // Create sub-sub-options if they exist
+                        const subSubDiv = document.createElement('div');
+                        subSubDiv.classList.add('sub-sub-options', 'hidden');
+                        subSubDiv.setAttribute('id', `sub-${subOption.id}`);
+
+                        if (subOption.subSubOptions) {
+                            subOption.subSubOptions.forEach(subSubOption => {
+                                const link = document.createElement('a');
+                                link.href = '#';
+                                link.innerText = subSubOption.name;
+                                link.onclick = (e) => {
+                                    e.preventDefault();
+                                    loadPage(subSubOption.page); // Ensure this function is defined
+                                };
+                                subSubDiv.appendChild(link);
+                            });
+                        }
+
+                        // Append sub button and its sub-sub-options
+                        subDiv.appendChild(subButton);
+                        subDiv.appendChild(subSubDiv);
+                    });
+
+                    // Append the sub-options div to the menu
+                    menuDiv.appendChild(subDiv);
+                }
+            });
+
+            // Now add the event listeners for main and sub buttons AFTER rendering
+            addEventListenersToMenu(menuDiv);
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+}
+
+// Function to add event listeners
+function addEventListenersToMenu(menuDiv) {
+    menuDiv.addEventListener('click', (event) => {
+        // Handle main button click
+        if (event.target.classList.contains('main-button')) {
+            const targetId = event.target.getAttribute('data-id');
+            const targetElement = document.getElementById(targetId);
+
+            // Close all other main menus
+            document.querySelectorAll(".sub-options").forEach(menu => {
+                if (menu !== targetElement) {
+                    menu.classList.add("hidden");
+                }
+            });
+
+            // Toggle clicked menu
+            if (targetElement) {
+                targetElement.classList.toggle("hidden");
+            }
+        }
+
+        // Handle sub-button click
+        else if (event.target.classList.contains('sub-button')) {
+            const targetId = event.target.getAttribute('data-id');
+            const targetElement = document.getElementById(targetId);
+
+            // Close all other sub-sub-menus
+            document.querySelectorAll(".sub-sub-options").forEach(menu => {
+                if (menu !== targetElement) {
+                    menu.classList.add("hidden");
+                }
+            });
+
+            // Toggle clicked sub-sub-menu
+            if (targetElement) {
+                targetElement.classList.toggle("hidden");
+            }
+        }
+    });
+}
+
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            try {
+                const response = await fetch("http://localhost:15080/user/photo", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": token
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Update the profile image with the fetched photo
+                    const profileImgElement = document.getElementById('profile');
+                    profileImgElement.src = data.photo || 'uploads/default.jpg'; // Fallback if no photo
+                } else {
+                    console.error("Failed to fetch user photo");
+                }
+            } catch (error) {
+                console.error("Error fetching user photo:", error);
+            }
+        } else {
+            console.log("No token found, user not logged in.");
+        }
+    });
+
+
+    const text = "የአባላት ገጽ"; // Change this to any text
+        const heading = document.getElementById("animatedText");
+
+        function animateText() {
+            heading.innerHTML = ""; // Clear heading first
+            
+            // Create spans for each letter
+            for (let i = 0; i < text.length; i++) {
+                let span = document.createElement("span");
+                span.textContent = text[i];
+                span.classList.add("hidden-letter"); // Initially hidden
+                heading.appendChild(span);
+            }
+
+            const letters = document.querySelectorAll("#animatedText span");
+
+            let letterSpeed = 800;  // 🛠 Speed of letters appearing
+            let pauseBeforeFadeOut = 2000; // 🛠 How long text stays before disappearing
+            let fadeOutSpeed = 1500; // 🛠 Speed of fade-out animation
+
+            // Reveal each letter step by step
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.style.opacity = "1";
+                }, index * letterSpeed);
+            });
+
+            // After all letters appear, fade out
+            setTimeout(() => {
+                letters.forEach((letter) => {
+                    letter.classList.add("fade-out");
+                });
+            }, (text.length * letterSpeed) + pauseBeforeFadeOut);
+
+            // Reset and restart animation after fade-out
+            setTimeout(() => {
+                heading.innerHTML = ""; // Clear text
+                animateText(); // Restart animation
+            }, (text.length * letterSpeed) + pauseBeforeFadeOut + fadeOutSpeed);
+        }
+
+        animateText(); // Start animation
+
+
+</script>
+    
+    </body>
+</html>
+

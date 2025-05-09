@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    <link rel="shortcut icon" type="x-icon" href="default.jpg">
+    <style>
+        body {
+            background-color: #E6E6FA;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full height for fixed bottom */
+            margin: 0;
+        }
+        p1 {
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            font-size: larger;
+        }
+        h1 {
+            font-size: 50px;
+            font-weight: 900;
+            margin: 10px;
+            padding-left: 110px;
+            flex-grow: 0.9;
+            text-align: center;
+        }
+        h3 {
+            margin: 0px;
+            margin-bottom: 10px;
+        }
+        .header, .navigation-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .header {
+           
+            color: rgb(253, 253, 253);
+            padding: 10px;
+            text-align: center;
+            border-radius: 0px;
+            margin: 0px;
+            box-shadow: 0 0 10px;
+            height: 60px;
+
+           
+            background-image: url('MHSS.png'); /* Set your image path here */
+            background-size: contain; /* Scale the image to cover the entire section */
+            background-repeat: no-repeat;
+            background-size: 5%;
+            background-position: center; /* Center the image */
+            color:  #0072bc; /* Text color for better contrast */
+            
+            position: relative; /* Make it relative for absolute positioning of divs */
+            animation: bounce 20s ease-in-out infinite; 
+        }
+        @keyframes bounce {
+        0% {
+            background-position: -100% center; /* Start off-screen on the left */
+        }
+        40% {
+            background-position: 50% center; /* Move to the center */
+        }
+        100% {
+            background-position: 200% center; /* Reset to the left */
+        }
+    }
+        .toggle-button {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            background: none;
+            border: none;
+            position: absolute;
+            left: 30px;
+        }
+        .main-user {
+            display: flex;
+            flex: 1;
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }
+        .menu-bar-user {
+            width: 230px;
+            background-color: #0072bc;
+            color: white;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            font-size: 16px;
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            margin-top: 2px;
+            transition: width 0.3s; /* Smooth transition */
+        }
+        .menu-bar-user div:not(:last-child) {
+            border-bottom: 0.2px solid white;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        .menu-item-user {
+            margin: 5px;
+            margin-top: 10px;
+        }
+        .menu-item-user button {
+            font-size: 16px;
+            font-weight: normal;
+        }
+        .menu-item-user::before {
+            content: '*';
+            color: white;
+            margin-right: 5px;
+            font-size: 1.2em;
+        }
+        .menu-item-user button:hover {
+            background-color: #ffc527;
+            color: #0072bc;
+            border-radius: 10px;
+        }
+        .dropdown-content {
+            display: none;
+            background-color: none;
+            padding: 10px 0;
+            border-radius: 10px;
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color: #0072bc;
+            font-size: 12px; 
+        }
+        .dropdown-content a:hover {
+            background-color: #ffc527;
+            color: #0072bc;
+        }
+        .dropdown-content a::before {
+            content: '*'; /* Add the asterisk */
+            color: white; /* Set the color of the asterisk */
+            margin-right: 10px; /* Space between the asterisk and the text */
+            font-size: 1em; /* Adjust the size of the asterisk if needed */
+        }
+        .dropdown-content a:not(:last-child) {
+            border-bottom: 1px solid white;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            margin-left: 20px;
+        }
+        .left-user {
+            overflow-y: auto;
+            
+            transition: flex 0.3s; /* Smooth transition */
+        }
+        .center {
+            flex: 1;
+            padding: 5px;
+            border-radius: 8px;
+            overflow-y: auto;
+            display: flex; /* Use flex to center content */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+        }
+        .center-content {
+            text-align: center; /* Center text */
+            width: 100%; /* Full width to occupy space */
+        }
+        .bottom {
+            background-color: #0072bc;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            height: 80px;
+            margin-top: auto; /* Push to bottom */
+        }
+        .socials a {
+            margin: 0 10px;
+            color: #E6E6FA;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+        .socials a:hover {
+            color: #ffc527;
+            text-decoration: underline;
+        }
+        .navigation-bar {
+            background-color:#0072bc;
+            align-items: center;
+            width: 100%;
+        }
+        .navigation-bar a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 15px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 10px;
+            box-shadow: 0 0 5px;
+        }
+        .navigation-bar a:hover {
+            background-color: #ffc527;
+            color: #0072bc;
+        }
+        h3 {
+            color: white;
+            font-weight: normal;
+        }
+        button {
+            color: white;
+            background-color: #0072bc;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            height: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .member {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #0072bc;
+          
+        }
+        .member:hover {
+            background: #ffc527;
+            color: #0072bc;
+            border: 2px solid #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>መሰረተ ህይወት ሰ/ት/ቤት</h1>
+        <a href="signUp.html"><button class="member">ይግቡ</button></a>
+    </div>
+    <div class="navigation-bar">
+        <button class="toggle-button" onclick="toggleMenu()">&#9776;</button>
+        <a href="Home.html" onclick="loadPage('default.html'); return false;">ዋና ገጽ</a>
+        <a href="Aim.html" onclick="loadPage('Aim.html'); return false;">አላማ</a>
+        <a href="History.html" onclick="loadPage('History.html'); return false;">ታሪክ</a>
+        <a href="Video.html" onclick="loadPage('Video.html'); return false;">ምስሎች</a>
+        <a href="About.html" onclick="loadPage('About.html'); return false;">ስለ</a>
+        <a href="Contact-Us.html" onclick="loadPage('Contact-Us.html'); return false;">አግኙን</a>
+    </div>
+    <div class="main-user">
+        <div class="left-user" id="menuContainer">
+            <div class="menu-bar-user">
+                <h3>ማውጫ</h3>
+                <div class="menu-item-user">
+                    <button>ስብከት</button>
+                </div>
+                <div class="menu-item-user">
+                    <button class="menu-btn" onclick="toggleDropdown('dropdown1')">መዝሙሮች</button>
+                    <div class="dropdown-content" id="dropdown1">
+                        <a href="javascript:void(0);" onclick="openModal('መዝሙር በወር/ከአውደ አመት እስከ ብዙሃን ማርያም.pdf')">ከአውደ አመት እስከ ብዙሃን ማርያም</a>
+                        <a href="javascript:void(0);" onclick="openModal('መዝሙር በወር/ከዘመነ ጽጌ እስከ ህዳር 11.pdf')">ከዘመነ ጽጌ እስከ ህዳር 11</a>
+                        <a href="javascript:void(0);" onclick="openModal('መዝሙር በወር/ከታህሳስ 3 እስከ ጥር 7.pdf')">ከታህሳስ 3 እስከ ጥር 7</a>
+                        <a href="javascript:void(0);" onclick="openModal('መዝሙር በወር/ከጥምቀት እስከ ዘመነ መርአዊ.pdf')">ከጥምቀት እስከ ዘመነ መርአዊ</a>
+                        <a href="javascript:void(0);" onclick="openModal('መዝሙር በወር/ከየካቲት 16 እስከ አቢይ ጾም.pdf')">ከየካቲት 16 እስከ አቢይ ጾም</a>
+                        <a href="javascript:void(0);" onclick="openModal('መዝሙር በወር/ከመጋቢት 27 እስከ ሐምሌ 7.pdf')">ከመጋቢት 27 እስከ ሐምሌ 7</a>
+                        <a href="javascript:void(0);" onclick="openModal('መዝሙር በወር/ከፍልሰታ እስከ ጷጉሜን እና ልዩ ልዩ.pdf')">ከፍልሰታ እስከ ጷጉሜን እና ልዩ ልዩ</a>
+                        <a href="javascript:void(0);" onclick="openModal('መዝሙር በወር/ወረባት.pdf')">ወረባት</a>
+                    </div>
+                </div>
+                <div class="menu-item-user">
+                    <button>መጽሐፎች</button>
+                </div>
+                <div class="menu-item-user">
+                    <button>የእለቱ ምስባክ</button>
+                </div>
+                <div class="menu-item-user">
+                    <button>ጥያቄ እና መልሶቻቸው</button>
+                </div>
+                <!-- Modal -->
+                <div id="pdfModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <iframe id="pdfIframe" src=""></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="eachscroll center-content" id="contentArea">
+                <p1></p1>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <footer>
+            <p>&copy; 2017 መሰረተ ህይወት ሰ/ት/ቤት።<br> መብቱ የተጠበቀ ነው።</p>
+            <div class="socials">
+                <a href="https://wwww.youtube.com/channel/UCc4ymfw0EMMKcpSe6HGiiYg" target="_blank">Youtube</a>
+                <a href="https://https://tiktok.com/@meserete.hiwot.sunday.scl" target="_blank">Tiktok</a>
+                <a href="https://www.instagram.com/meserete.hiwot.sunday.school/" target="_blank">Instagram</a>
+                <a href="https://t.me/mhsshk" target="_blank">Telegram</a>
+                <a href="https://bit.ly/3dO60cn" target="_blank">Facebook</a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        function loadPage(page) {
+            fetch(page)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('contentArea').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading page:', error);
+                    document.getElementById('contentArea').innerHTML = '<p>Error loading content.</p>';
+                });
+        }
+
+        function toggleMenu() {
+            const menuBar = document.querySelector('.menu-bar-user');
+            menuBar.style.display = menuBar.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function openModal(pdfUrl) {
+            const modal = document.getElementById('pdfModal');
+            const iframe = document.getElementById('pdfIframe');
+            iframe.src = pdfUrl; // Set the PDF URL in the iframe
+            modal.style.display = 'flex'; // Show the modal
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('pdfModal');
+            modal.style.display = 'none'; // Hide the modal
+            const iframe = document.getElementById('pdfIframe');
+            iframe.src = ''; // Clear the iframe source
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('pdfModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
+

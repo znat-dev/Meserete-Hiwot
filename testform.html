@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testመሰረተ ህይወት ሰ/ት/ቤት</title>
+    <style>
+        #results {
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+        #results table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #results th, #results td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            color: #6A0DAD;
+            position: relative; /* For positioning edit button */
+        }
+        #results th {
+            background-color: #f2f2f2;
+            color: #6A0DAD;
+            font-weight: bolder;
+        }
+        .edit-button {
+            display: none; /* Initially hidden */
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: #e7ddee;
+            border: none;
+            cursor: pointer;
+        }
+        td:hover .edit-button {
+            display: inline-block; /* Show button on hover */
+        }
+        
+        .edit-input {
+            width: calc(100% + 10px); /* Adjust width to leave space for the button */
+            display: inline-block; /* Align input and button horizontally */
+            margin-right: 10px; /* Space between input and button */
+        }
+        .save-button {
+            display: inline-block; /* Display button inline */
+        }
+        #class-selection-modal, #edit-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid black;
+            padding: 20px;
+            display: none; /* Initially hidden */
+        }
+        li:hover {
+            background-color: #c4a7da;
+        }
+        #year {
+            width: 100px;
+        }
+        input {
+            text-align: center;
+        }
+        .sun {
+            color: #6A0DAD;
+            font-weight: bolder;
+        }
+        .hold {
+            color: #6A0DAD;
+            border-color: #c4a7da;
+            background-color: #e7ddee;
+        }
+        button:hover {
+            color: #6A0DAD;
+            background-color: white;
+        }
+        ::placeholder {
+            color: #c4a7da;
+        }
+        p {
+            color: #008080;
+            font-weight: bolder;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="sun">የሰንበት ትምህርት ቤቱ አባላት ዝርዝር መረጃ</h2>
+
+    <!-- Input for year -->
+    <label for="year" class="sun">የምዝገባ አመት ምህረት ያስገቡ :</label>
+    <input type="number" id="year" placeholder="አመተ ምህረት" min="1900" max="2100">
+    <button id="fetch-year" class="hold">በተመዘገቡበት አመተ ምህረት ፈልግ</button>
+
+    <!-- Input for name -->
+    <label for="name" class="sun">ስም ያስገቡ :</label>
+    <input type="text" id="name" placeholder="ለመፈለግ ስም አስገቡ">
+    <button id="fetch-name" class="hold">በስም ፈልግ</button><br><br>
+
+   
+    <div id="results"></div>
+
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" style="display:none;">
+        <h3>የተመረጡት አባል አርትዕ</h3>
+        <label for="edit-field">የማስተካከያ መረጃ:</label>
+        <input type="text" id="edit-field" class="edit-input" placeholder="የማስተካከያ መረጃ">
+        <button id="save-edit" class="hold">ይቀይሩ</button>
+        <button id="close-edit-modal" class="hold">መዝጋት</button>
+    </div>
+
+    <script>
+        let currentUser; // Store the user object being edited
+        let currentFieldName; // Store the name of the field being edited
+    
+        // Function to fetch and display data
+        function fetchData(year = null, name = null) {
+            let url = "http://127.0.0.1:15080/fetch-data";
+            let params = [];
+            if (year) {
+                params.push(`year=${year}`);
+            }
+            if (name) {
+                params.push(`name=${encodeURIComponent(name)}`);
+            }
+            if (params.length > 0) {
+                url += `?${params.join('&')}`;
+            }
+    
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok: " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const resultsDiv = document.getElementById("results");
+                    resultsDiv.innerHTML = ""; // Clear previous results
+                    resultsDiv.style.display = "block"; // Show results
+    
+                    if (data.length === 0) {
+                        resultsDiv.innerHTML = "<p>በተጠቀሰው አመት የተመዘገበ አባል የለም።</p>";
+                        return;
+                    }
+    
+                    // Create a table to display results
+                    const table = document.createElement("table");
+                    const headerRow = document.createElement("tr");
+    
+                    // Add table headers
+                    const headers = [
+                        "photo", "name", "father_name", "grandfather_name", "birth_year", "birth_month",
+                        "birth_day", "address_city", "district", "house_number", "mobile", "alternate_phone",
+                        "email", "baptism_name", "father_christian_name", "father_service_location",
+                        "education_1_8", "education_9_10", "education_11_12",
+                        "college_name1", "college_start1", "college_end1",
+                        "college_name2", "college_start2", "college_end2",
+                        "college_name3", "college_start3", "college_end3",
+                        "occupation1", "occupation2", "occupation3",
+                        "current_study_field", "current_study_institution",
+                        "work_status", "employer_name", "marriage_status",
+                        "living_with", "spiritual_service_before", "spiritual_service_place_name",
+                        "service_option_part1", "service_option_part2", "service_option_part3",
+                        "full_name",
+                        "relatives_name1", "relatives_name2", "relatives_name3",
+                        "relatives_phone1", "relatives_phone2", "relatives_phone3", "registration_year"
+                    ];
+    
+                    headers.forEach(headerText => {
+                        const th = document.createElement("th");
+                        th.textContent = headerText;
+                        headerRow.appendChild(th);
+                    });
+                    table.appendChild(headerRow);
+    
+                    // Populate table with data
+                    data.forEach(user => {
+                        const row = document.createElement("tr");
+                        const fields = [
+                            user.photo, user.name, user.father_name, user.grandfather_name, user.birth_year, user.birth_month,
+                            user.birth_day, user.address_city, user.district, user.house_number,
+                            user.mobile, user.alternate_phone, user.email, user.baptism_name,
+                            user.father_christian_name, user.father_service_location,
+                            user.education_1_8, user.education_9_10, user.education_11_12,
+                            user.college_name1, user.college_start1, user.college_end1,
+                            user.college_name2, user.college_start2, user.college_end2,
+                            user.college_name3, user.college_start3, user.college_end3,
+                            user.occupation1, user.occupation2, user.occupation3,
+                            user.current_study_field, user.current_study_institution,
+                            user.work_status, user.employer_name, user.marriage_status,
+                            user.living_with, user.spiritual_service_before, user.spiritual_service_place_name,
+                            user.service_option_part1, user.service_option_part2, user.service_option_part3,
+                            user.full_name,
+                            user.relatives_name1, user.relatives_name2, user.relatives_name3,
+                            user.relatives_phone1, user.relatives_phone2, user.relatives_phone3, user.registration_year
+                        ];
+    
+                        fields.forEach((field, index) => {
+                            const td = document.createElement("td");
+                            td.textContent = field;
+    
+                            td.onclick = () => {
+                                currentUser = user; // Store the entire user object
+                                currentFieldName = headers[index]; // Store the field name
+                                openEditField(td, field); // Open edit field
+                            };
+    
+                            row.appendChild(td);
+                        });
+    
+                        table.appendChild(row);
+                    });
+                    resultsDiv.appendChild(table);
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        }
+    
+        // Function to open the edit field
+        function openEditField(td, currentValue) {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.className = "edit-input";
+            input.value = currentValue;
+
+            const saveButton = document.createElement("button");
+            saveButton.textContent = "ይቀይሩ"; // Save in Amharic
+            saveButton.id = "save-edit"; // Assign ID to the button
+
+            saveButton.onclick = () => {
+                console.log("Save button clicked"); // Check if the click event is firing
+                const newValue = input.value;
+                td.textContent = newValue; // Update displayed value
+                
+                // Call the update function with relevant data
+                updateUserField(currentUser.name, currentUser.father_name, currentUser.grandfather_name, {
+                    [currentFieldName]: newValue // Update the specific field
+                });
+                
+                td.removeChild(input); // Remove input
+                td.removeChild(saveButton); // Remove save button
+            };
+
+            input.onblur = () => {
+                td.removeChild(input);
+                td.removeChild(saveButton);
+                td.textContent = currentValue; // Restore old value if not saved
+            };
+
+            input.onkeydown = (event) => {
+                if (event.key === 'Enter') {
+                    saveButton.click(); // Trigger save button click
+                }
+            };
+
+            td.innerHTML = ''; // Clear the cell
+            td.appendChild(input); // Add input to the cell
+            td.appendChild(saveButton); // Add save button to the cell
+            input.focus(); // Focus the input
+        }
+        function updateUserField(name, fatherName, grandfatherName, updatedData) {
+    fetch(`http://127.0.0.1:15080/update-user`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            name: name,
+            father_name: fatherName,
+            grandfather_name: grandfatherName,
+            ...updatedData // Spread the updated data to include all fields
+        }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Network response was not ok: " + response.status);
+        }
+        return response.json();
+    })
+    .then(() => {
+        alert("User updated successfully!");
+        console.log({
+    name: name,
+    father_name: fatherName,
+    grandfather_name: grandfatherName,
+    ...updatedData
+});
+        fetchData(); // Refresh data to reflect changes
+    })
+    .catch(error => {
+        console.error("Error updating user:", error);
+    });
+}
+    
+        // Event listener for the year button
+        document.getElementById("fetch-year").addEventListener("click", () => {
+            const year = document.getElementById("year").value;
+            fetchData(year); // Fetch data with specified year
+        });
+    
+        // Event listener for the name button
+        document.getElementById("fetch-name").addEventListener("click", () => {
+            const name = document.getElementById("name").value;
+            fetchData(null, name); // Fetch data with specified name
+        });
+    
+        // Automatically fetch data when the page is loaded
+        fetchData();
+    </script>
+</body>
+</html>

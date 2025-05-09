@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>መሰረተ ህይወት ሰ/ት/ቤት</title>
+    
+    <style>
+/* General Reset */
+body, h1, h2, p, ul, li, a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+
+}
+
+
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #0072bc; 
+    color: #fff;
+}
+
+header .logo {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+header nav ul {
+    display: flex;
+    gap: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    transition: color 0.3s;
+   
+}
+
+header nav ul li a:hover {
+    background-color: #ffc527;
+    color: #0072bc; 
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Hero Section */
+
+
+.hero h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: bolder;
+   
+}
+.hero h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bolder;
+   
+}
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+  
+}
+
+
+
+  /* Footer */
+  footer {
+            height: 90px;
+            text-align: center;
+            background-color: #0072bc;
+            color: #fff;
+            padding: 20px;
+        
+        }
+        footer .socials {
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+        footer .socials a {
+            margin: 0 40px;
+            color: #fff;
+            transition: color 0.3s;
+       
+        }
+
+        footer .socials a:hover {
+            color: #ffc527;
+            text-decoration: underline;
+         
+        }
+
+        .service {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .service > li {
+            position: relative;
+            display: inline-block;
+        }
+
+        .service a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background-color: white; /* White background */
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .service li:hover .dropdown {
+            display: block; /* Show dropdown on hover */
+        }
+
+        .dropdown ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown li {
+            width: 150px;
+           
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 10px;
+            color: #0072bc;
+            text-decoration: none;
+          
+        }
+
+        .dropdown a:hover {
+            background-color: #ffc527; /* Light gray on hover */
+        }
+
+        .hero {
+            opacity: 0.8;
+            height: 330px;
+            background-image: url('MHSS.png'); /* Set your image path here */
+            background-size: contain; /* Scale the image to cover the entire section */
+            background-repeat: no-repeat;
+            background-size: 40%;
+            background-position: center; /* Center the image */
+            color: #0072bc; /* Text color for better contrast */
+            padding: 50px; /* Add padding for spacing */
+            padding-top: 100px; /* Add padding for spacing */
+            text-align: center; /* Center the text */
+            position: relative; /* Make it relative for absolute positioning of divs */
+            animation: bounce 10s ease-in-out infinite; 
+        }
+        
+            @keyframes bounce {
+        0% {
+            background-position: -100% center; /* Start off-screen on the left */
+        }
+        40% {
+            background-position: 50% center; /* Move to the center */
+        }
+        100% {
+            background-position: 200% center; /* Reset to the left */
+        }
+    }
+        .hero p1 {
+            color: #0072bc;
+        }
+        .hero h3 {
+            color: #ffc527;
+            font-weight: bolder;
+        }
+        .cta-button {
+            opacity: 1;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0072bc;
+            color: white; /* Button text color */
+            text-decoration: none;
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #ffc527;
+            color: #0072bc;
+        }
+
+        .side-div {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+.side-div h3 {
+    font-size: 25px;
+}
+        .left {
+            left: 10%;
+        }
+
+        .right {
+            right: 10%;
+            width: fit-content;
+        }
+
+        .visible {
+            transform: translateY(-50%) scale(1);
+            opacity: 1;
+        }
+       
+        .fb {
+            margin-left: 10px;
+        }
+        .fbb {
+            margin-left: 7px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">መሰረተ ሕይወት ሰ/ት/ቤት</div>
+        <nav>
+            <ul class="service">
+                <li><a href="userHome.html">ዋና ገጽ</a></li>
+                <li><a href="#services">አገልግሎት</a>
+                    <ul class="dropdown">
+                        <li><a href="#service1">ትምህርት</a></li>
+                        <li><a href="#service2">ዝማሬ</a></li>
+                        <li><a href="#service3">ትሩፋት</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact">አግኙን</a>
+                    <ul class="dropdown">
+                        <li><a class="fbb" href="https://wwww.youtube.com/channel/UCc4ymfw0EMMKcpSe6HGiiYg" target="_blank"><img src="youtube.png" alt="youtube" width="40"></a></li>
+                        <li><a class="fb" href="https://https://tiktok.com/@meserete.hiwot.sunday.scl" target="_blank"><img src="tiktok.png" alt="tiktok" width="30"></a></li>
+                        <li><a class="fb" href="https://www.instagram.com/meserete.hiwot.sunday.school/" target="_blank"><img src="instagram.png" alt="instagram" width="30"></a></li>
+                        <li><a class="fb" href="https://t.me/mhsshk" target="_blank"><img src="telegram.png" alt="telegram" width="30"></a></li>
+                        <li><a href="https://bit.ly/3dO60cn" target="_blank"><img src="fb.png" alt="facebook" width="50"></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>በስም አብ ወወልድ ወመንፈስ ቅዱስ አሐዱ አምላክ አሜን!</h1>
+        <p>“ጌታ ቢፈቅድ ብንኖርም ይህን ወይም ያን እናደርጋለን”<br>
+            የያዕቆብ መልእክት 4፡15</p>
+        <h2>እንኳን ደህና መጡ!</h2><br>
+        <a href="signUp.html" class="cta-button" id="toggle-button">ይግቡ</a>
+
+        <div class="side-div left" id="left-div">
+            <h3>ተልእኮ</h3>
+            <p1>
+                በኮተቤ ኪዳነ ምህረትና መድኃዓለም ቤተ ክርስቲያን<br> አጥቢያ ለሚገኙ አባላትና ምዕመናን የቤተ ክርስቲያንን<br>
+                መሰረታዊ ትምህርት በማስተማር፣ ያሬዳዊ ዝማሬን <br>በማስጠናት፣ መንፈሳዊ አገልግሎቶችን በመስጠት፣ <br>
+                ማህበራዊና ኢኮኖሚያዊ መርሐ-ግበር በመዘርጋት<br> የአባላትና የምዕመናን ሕይወትን በማሻሻል ዘመኑን <br>
+                የዋጀ ክርስቲያን መፍጠር ነው፡፡
+            </p1>
+        </div>
+        <div class="side-div right" id="right-div">
+            <h3>ርዕይ</h3>
+            <p1>“ዘመኑን የዋጀ መንፈሳዊ ትውልድ<br> የሚፈራበት የሊቃውንት አስተምህሮ <br>የትምህርት ማዕከል ሆኖ መገኘት”</p1>
+        </div>
+    </section>
+    <section class="content">
+        <div class="content-block">
+            
+        </div>
+        <div class="content-block">
+            
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2017 መሰረተ ህይወት ሰ/ት/ቤት።<br> መብቱ የተጠበቀ ነው።</p>
+        <div class="socials">           
+            <a href="https://wwww.youtube.com/channel/UCc4ymfw0EMMKcpSe6HGiiYg" target="_blank">Youtube</a>
+            <a href="https://https://tiktok.com/@meserete.hiwot.sunday.scl" target="_blank">Tiktok</a>
+            <a href="https://www.instagram.com/meserete.hiwot.sunday.school/" target="_blank">Instagram</a>
+            <a href="https://t.me/mhsshk" target="_blank">Telegram</a>
+            <a href="https://bit.ly/3dO60cn" target="_blank">Facebook</a>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('toggle-button').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default anchor behavior
+            const leftDiv = document.getElementById('left-div');
+            const rightDiv = document.getElementById('right-div');
+
+            // Toggle visibility of the divs
+            if (leftDiv.classList.contains('visible')) {
+                // Hide divs and redirect to userHome.html
+                leftDiv.classList.remove('visible');
+                rightDiv.classList.remove('visible');
+                setTimeout(() => {
+                    window.location.href = this.href; // Redirect after animation
+                }, 500); // Match the duration of the CSS transition
+            } else {
+                // Show divs
+                leftDiv.classList.add('visible');
+                rightDiv.classList.add('visible');
+            }
+        });
+    </script>
+</body>
+</html>

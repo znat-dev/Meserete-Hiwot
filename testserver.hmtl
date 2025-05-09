@@ -1,0 +1,69 @@
+app.put('/update-user', (req, res) => {
+    console.log("Received update request:", req.body); // Log the incoming request
+    const {
+        name, father_name, grandfather_name, birth_year, birth_month, birth_day,
+        address_city, district, house_number, mobile, alternate_phone, email,
+        baptism_name, father_christian_name, father_service_location, education_1_8,
+        education_9_10, education_11_12, college_name1, college_start1, college_end1,
+        college_name2, college_start2, college_end2, college_name3, college_start3,
+        college_end3, occupation1, occupation2, occupation3, current_study_field,
+        current_study_institution, work_status, employer_name, marriage_status,
+        living_with, spiritual_service_before, spiritual_service_place_name,
+        service_option_part1, service_option_part2, service_option_part3,
+        full_name, relatives_name1, relatives_name2, relatives_name3,
+        relatives_phone1, relatives_phone2, relatives_phone3, registration_year,
+        photo
+    } = req.body;
+
+    // Check if the necessary fields are provided
+    if (!name || !father_name || !grandfather_name) {
+        return res.status(400).send('Name, father name, and grandfather name are required for updating user.');
+    }
+
+    // SQL query to update all fields based on the combination of name, father_name, and grandfather_name
+    const sql = `UPDATE mh.form_data SET
+        birth_year = ?, birth_month = ?, birth_day = ?, address_city = ?,
+        district = ?, house_number = ?, mobile = ?, alternate_phone = ?,
+        email = ?, baptism_name = ?, father_christian_name = ?, 
+        father_service_location = ?, education_1_8 = ?, education_9_10 = ?,
+        education_11_12 = ?, college_name1 = ?, college_start1 = ?, college_end1 = ?,
+        college_name2 = ?, college_start2 = ?, college_end2 = ?,
+        college_name3 = ?, college_start3 = ?, college_end3 = ?,
+        occupation1 = ?, occupation2 = ?, occupation3 = ?,
+        current_study_field = ?, current_study_institution = ?, work_status = ?,
+        employer_name = ?, marriage_status = ?, living_with = ?,
+        spiritual_service_before = ?, spiritual_service_place_name = ?,
+        service_option_part1 = ?, service_option_part2 = ?, service_option_part3 = ?,
+        full_name = ?, relatives_name1 = ?, relatives_name2 = ?, relatives_name3 = ?,
+        relatives_phone1 = ?, relatives_phone2 = ?, relatives_phone3 = ?,
+        registration_year = ?, photo = ?
+        WHERE name = ? AND father_name = ? AND grandfather_name = ?`;
+
+    db.query(sql, [
+        birth_year, birth_month, birth_day, address_city, district,
+        house_number, mobile, alternate_phone, email, baptism_name,
+        father_christian_name, father_service_location, education_1_8,
+        education_9_10, education_11_12, college_name1, college_start1, college_end1,
+        college_name2, college_start2, college_end2, college_name3, college_start3,
+        college_end3, occupation1, occupation2, occupation3, current_study_field,
+        current_study_institution, work_status, employer_name, marriage_status,
+        living_with, spiritual_service_before, spiritual_service_place_name,
+        service_option_part1, service_option_part2, service_option_part3,
+        full_name, relatives_name1, relatives_name2, relatives_name3,
+        relatives_phone1, relatives_phone2, relatives_phone3, registration_year,
+        photo, name, father_name, grandfather_name
+    ], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Error updating data');
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).send('No user found with the provided names');
+        }
+
+        res.send('Data updated successfully!');
+    });
+});
+
+

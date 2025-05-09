@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>የልማት ክፍል እቅድ</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        th, td {
+            border-right: 1px solid #b1acac;
+            padding: 8px;
+            text-align: left;
+        }
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+        th, td {
+            border-bottom: 1px solid #b1acac;
+            background-color: #f4f4f4;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+            color: #0072bc;
+            border-right: 1px solid #b1acac;
+        }
+        input {
+            border-color: #f4f4f4;
+            width: 40px;
+        }
+        textarea {
+            border-color: #b1acac;
+        }
+        input[type="checkbox"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1px solid #b1acac;
+            border-radius: 4px;
+            background-color: white;
+        }
+        input[type="checkbox"]:checked {
+            border-color: #b1acac;
+            background-color: #0072bc;
+        }
+        input[type="checkbox"]::after {
+            content: "+";
+            color: white;
+            display: block;
+            text-align: center;
+            line-height: 18px;
+            visibility: hidden;
+        }
+        input[type="checkbox"]:checked::after {
+            visibility: visible;
+        }
+        .qqq, button  {
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            background-color: #0072bc;
+            padding: 5px;
+        }
+        .qqq:hover {
+            color: #0072bc;
+            border: 1px solid #0072bc;
+            background-color: #f4f4f4;
+        }
+        .qqqq {
+            color: #0072bc;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="qqqq">የልማት ክፍል እቅድ ማስገቢያ ፎርም</h1>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>አይነት</th>
+                <th>ብዛት</th>
+                <th>መስ</th>
+                <th>ጥቅ</th>
+                <th>ህዳ</th>
+                <th>ታህ</th>
+                <th>ጥር</th>
+                <th>የካ</th>
+                <th>መጋ</th>
+                <th>ሚያ</th>
+                <th>ግን</th>
+                <th>ስኔ</th>
+                <th>ሐም</th>
+                <th>ነሐ</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <button class="qqq" id="addRow">መስመር ጨምር</button>
+    <button class="qqq" id="save">አስቀምጥ</button>
+    <button class="qqq" id="fetch">እቅድ አሳይ</button>
+
+    <script>
+        document.getElementById("addRow").onclick = function () {
+            const tbody = document.querySelector("#myTable tbody");
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td><textarea></textarea></td>
+                <td><input type="number" value="0"></td>
+                ${Array(12).fill('<td><input type="checkbox"></td>').join("")}
+                <td><button onclick="deleteRow(this)">ሰርዝ</button></td>
+            `;
+            tbody.appendChild(row);
+        };
+    
+        function deleteRow(button) {
+            button.parentNode.parentNode.remove();
+        }
+    
+        async function handleSave() {
+            const userRole = await getUserRole(); // Fetch user role on button click
+            console.log("User Role:", userRole); // Log the user role for debugging
+    
+            // Check if the user has permission to save
+            if (!hasPermission(userRole, 'save')) {
+                alert("ማስቀመጥ አይችሉም። ለተጠሪ ያመልክቱ።."); // Show alert if not allowed
+                console.error("User does not have permission to save.");
+                return; // Exit if no permission
+            }
+    
+            const rows = document.querySelectorAll("#myTable tbody tr");
+            const data = [];
+    
+            rows.forEach((row) => {
+                const cells = row.querySelectorAll("textarea, input[type='number'], input[type='checkbox']");
+                const rowData = {
+                    type: cells[0].value.trim(),
+                    quantity: parseInt(cells[1].value),
+                    checkboxes: Array.from(cells).slice(2).map(checkbox => checkbox.checked ? 1 : 0)
+                };
+    
+                if (!rowData.type || rowData.quantity <= 0) {
+                    alert("የእቅድ አይነት እና ብዛት በትክክል መሞላት አለበት።");
+                    return;
+                }
+    
+                const checkedCount = rowData.checkboxes.filter(val => val === 1).length;
+                if (checkedCount !== rowData.quantity) {
+                    alert(`የወር መጠን (${checkedCount}) ከብዛት ጋር እኩል መሆን አለበት። (${rowData.quantity}).`);
+                    return;
+                }
+    
+                data.push(rowData);
+            });
+    
+            fetch("http://localhost:15080/development_plan_save", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                fetchPlans();
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    
+        document.getElementById("save").onclick = handleSave; // Ensure this is set to call handleSave
+    
+        document.getElementById("fetch").onclick = fetchPlans; // Fetch button functionality
+    
+        function fetchPlans() {
+            fetch("http://localhost:15080/development_plans")
+                .then(response => response.json())
+                .then(plans => {
+                    if (!Array.isArray(plans)) {
+                        console.error("ትክክለኛ ያልሆነ መረጃ!", plans);
+                        return;
+                    }
+    
+                    const tbody = document.querySelector("#myTable tbody");
+                    tbody.innerHTML = "";
+    
+                    plans.forEach(plan => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td><textarea>${plan.type}</textarea></td>
+                            <td><input type="number" value="${plan.quantity}"></td>
+                            ${plan.checkboxes.map(val => `<td><input type="checkbox" ${val ? "checked" : ""}></td>`).join("")}
+                            <td><button onclick="deletePlan(${plan.id})">ሰርዝ</button></td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error("እቅዱን ለማሳየት አልተቻለም።", error));
+        }
+    
+        async function deletePlan(id) {
+            const userRole = await getUserRole(); // Fetch user role before deleting
+            if (!hasPermission(userRole, 'delete')) {
+                alert("መሰረዝ አይችሉም። ለተጠሪ ያመልክቱ።"); // Show alert if not allowed
+                console.error("User does not have permission to delete.");
+                return; // Exit if no permission
+            }
+    
+            fetch(`http://localhost:15080/development_plans/${id}`, { method: "DELETE" })
+                .then(response => {
+                    if (response.status === 403) {
+                        alert("መሰረዝ አይችሉም። ለተጠሪ ያመልክቱ።");
+                        return;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data) {
+                        alert(data.message);
+                        fetchPlans();
+                    }
+                })
+                .catch(error => console.error("እቅዱን ለመሰረዝ አልተቻለም።", error));
+        }
+    
+        async function getUserRole() {
+            const token = localStorage.getItem('token');
+            if (!token) return 'normal_user'; // Default if no token
+    
+            try {
+                const response = await fetch("http://localhost:15080/user/role", {
+                    method: "GET",
+                    headers: { "Authorization": token }
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    return data.role || 'normal_user';
+                } else {
+                    return 'normal_user';
+                }
+            } catch (error) {
+                console.error("Error fetching user role:", error);
+                return 'normal_user';
+            }
+        }
+    
+        function hasPermission(userRole, action) {
+            const permissions = {
+                save: ['admin', 'super_admin', 'sub_admin'],
+                delete: ['admin', 'super_admin']
+            };
+            return permissions[action] && permissions[action].includes(userRole);
+        }
+    
+        document.addEventListener("DOMContentLoaded", async () => {
+            const userRole = await getUserRole(); // Fetch the user's role
+            console.log("User Role:", userRole);
+        });
+    </script>
+</body>
+</html>
