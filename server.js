@@ -11,7 +11,7 @@ const nodemailer = require("nodemailer");
 
 
 const app = express();
-const PORT = 15080;
+const PORT = 3306;
 
 
 // Middleware
