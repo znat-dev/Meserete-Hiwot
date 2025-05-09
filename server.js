@@ -21,10 +21,10 @@ app.use(bodyParser.json());
 
 // MySQL Connection
 const db = mysql.createConnection({
-    host: process.env.sql108.infinityfree.com,
-    user: process.env.if0_38940004 , // Change if needed
-    password: process.env.nati1627, // Change if needed
-    database: process.env.if0_38940004_senbet, // Replace with your database name
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER, // Change if needed
+    password: process.env.DB_PASSWORD, // Change if needed
+    database: process.env.DB_NAME, // Replace with your database name
 });
 
 db.connect((err) => {
